@@ -1,0 +1,39 @@
+VILLE
+   1: Argis                 /-
+   2: Ambérieu-en-Bugey     /-
+   3: Grenoble              /-
+   4: Lagnieu               /-
+   5: Vaux en bugey         /-
+   6: Aubenas               /-
+   7: Montélimar            /-
+   8: Chambéry              /-
+   9: Lyon                  /-
+  10: La Rochelle           /-
+  11: Bourg-en-Bresse       /-
+  12: Montalieu-Vercieu     /-
+  13: Serrières-de-Briord   /-
+  14: Roanne                /-
+  15: Villars-les-dombes    /-
+  16: Montluel              /-
+  17: Tenay                 /-
+  18: Ambutrix              /-
+
+RESTAURANT
+   1: Le Rive Gauche (ancien nom, nouveau nom ->) L'Hestia  /-
+   2: Le Refuge de l'Hermite                                /-
+   3: le repas chez mémé SAUCISSONS                         /-
+   4:
+   5:
+   6: Antica Trattoria                                      /-
+
+LOISIR
+   1:
+   2: Métropolis Bowling Laser Game, Escape Game        /-
+   3: Fort de Bron ~ c'est juste à côté de 2 donc jsp si c'est très pertinant/stonks de le mettre, à voir
+   4: Bibliothèques des Barolles                        /-
+   5: Parc des oiseaux                                  /-
+   6: Bcube Bowling                                     /-
+
+   13 A
+   22 D
+   4 N
