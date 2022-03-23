@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Sommets {
     private char type;
     private String name;
@@ -13,5 +15,13 @@ public class Sommets {
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public String toString() {
+        return "Sommets{" +
+                "type=" + type +
+                ", name='" + name + '\'' +
+                '}';
     }
 }
