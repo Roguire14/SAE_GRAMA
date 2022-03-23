@@ -26,4 +26,14 @@ public class Aretes {
     public Sommets getSommmetB() {
         return sommmetB;
     }
+
+    @Override
+    public String toString() {
+        return "Aretes{" +
+                "typarete='" + typarete + '\'' +
+                ", distance=" + distance +
+                ", sommetA=" + sommetA +
+                ", sommmetB=" + sommmetB +
+                '}';
+    }
 }

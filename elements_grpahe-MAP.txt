@@ -8,7 +8,7 @@ VILLE
    7: Montélimar            /-
    8: Chambéry              /-
    9: Lyon                  /-
-  10: La Rochelle           /-
+  10: Feurs                 /-
   11: Bourg-en-Bresse       /-
   12: Montalieu-Vercieu     /-
   13: Serrières-de-Briord   /-
@@ -16,24 +16,25 @@ VILLE
   15: Villars-les-dombes    /-
   16: Montluel              /-
   17: Tenay                 /-
-  18: Ambutrix              /-
+  18:
 
 RESTAURANT
    1: Le Rive Gauche (ancien nom, nouveau nom ->) L'Hestia  /-
    2: Le Refuge de l'Hermite                                /-
    3: le repas chez mémé SAUCISSONS                         /-
-   4:
-   5:
+   4: Le bouchon de la 7                                    /-
+   5: Au Gourmet de Meys                                    /-
    6: Antica Trattoria                                      /-
 
 LOISIR
-   1:
+   1: Plage des cordeliers                              /-
    2: Métropolis Bowling Laser Game, Escape Game        /-
-   3: Fort de Bron ~ c'est juste à côté de 2 donc jsp si c'est très pertinant/stonks de le mettre, à voir
+   3: Camping Nature Parc L'Ardechois                   /-
    4: Bibliothèques des Barolles                        /-
    5: Parc des oiseaux                                  /-
    6: Bcube Bowling                                     /-
 
-   13 A
-   22 D
-   4 N
+   13 A  ~ 13.9
+   18 D  ~ 17.6
+   13 N  ~ 13.9
+   T 44
