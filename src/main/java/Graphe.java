@@ -37,7 +37,8 @@ public class Graphe {
 
     public void getVoisins(Sommets sommets){
         for (int i = 0; i<LAretes.size();i++){
-            if(LAretes.get(i).getSommetA()==sommets||LAretes.get(i).getSommmetB()==sommets)LAretes.get(i).getInfos();
+            if(LAretes.get(i).getSommetA()==sommets||LAretes.get(i).getSommmetB()==sommets)
+                LAretes.get(i).getInfos();
         }
     }
 
