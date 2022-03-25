@@ -1,3 +1,5 @@
+import org.json.simple.parser.JSONParser;
+
 import java.util.ArrayList;
 
 public class Graphe {
@@ -38,5 +40,9 @@ public class Graphe {
             if(LAretes.get(i).getSommetA()==sommets||LAretes.get(i).getSommmetB()==sommets)LAretes.get(i).getInfos();
         }
     }
+
+//    public void charge(){
+//        JSONParser parser = new JSONParser().parse();
+//    }
 
 }

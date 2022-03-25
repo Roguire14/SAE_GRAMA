@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 public class TestSAE {
     public static void main(String args[]){
+
         Sommets ambe = new Sommets('V',"Ambérieu-en-Bugey");
         Sommets bourg = new Sommets('V',"Bourg-en-Bresse");
         Sommets vaux = new Sommets('V',"Vaux-en-Bugey");
