@@ -1,10 +1,10 @@
 public class Aretes {
-    private String typarete;
+    private char typarete;
     private int distance;
     private Sommets sommetA;
     private Sommets sommmetB;
 
-    public Aretes(String typarete, int distance, Sommets sommetA, Sommets sommmetB){
+    public Aretes(char typarete, int distance, Sommets sommetA, Sommets sommmetB){
         this.typarete = typarete;
         this.distance = distance;
         this.sommetA = sommetA;
@@ -15,7 +15,7 @@ public class Aretes {
         return distance;
     }
 
-    public String getTyparete() {
+    public char getTyparete() {
         return typarete;
     }
 
@@ -35,5 +35,9 @@ public class Aretes {
                 ", sommetA=" + sommetA +
                 ", sommmetB=" + sommmetB +
                 '}';
+    }
+
+    public void getInfos(){
+        System.out.println("Il existe un lien entre "+sommetA.getName()+" et "+sommmetB.getName()+" qui fait "+distance+" km de type "+typarete);
     }
 }

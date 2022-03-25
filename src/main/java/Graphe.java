@@ -29,7 +29,14 @@ public class Graphe {
                 '}';
     }
 
-    public void setLSommets(ArrayList<Sommets> LSommets) {
-        this.LSommets = LSommets;
+//    for(int i=0;i<graphe.getLAretes().size();i++){
+//        graphe.getLAretes().get(i).getInfos();
+//    }
+
+    public void getVoisins(Sommets sommets){
+        for (int i = 0; i<LAretes.size();i++){
+            if(LAretes.get(i).getSommetA()==sommets||LAretes.get(i).getSommmetB()==sommets)LAretes.get(i).getInfos();
+        }
     }
+
 }
