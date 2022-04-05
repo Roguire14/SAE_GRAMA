@@ -7,7 +7,8 @@
     "V,Chambéry": "D,84",
     "V,Villars-les-Dombes": "D,31",
     "V,Argis": "D,17",
-    "V,Vaux-en-Bugey": "D,5"
+    "V,Vaux-en-Bugey": "D,5",
+    "V,Montluel": "A,35"
   },
   "V,Argis": {
     "V,Ambérieu-en-Bugey": "D,17",
@@ -48,7 +49,8 @@
     "V,Montalieu-Vercieu": "D,14",
     "V,Vaux-en-Bugey": "D,3",
     "L,BCube Bowling": "D,3",
-    "R,Le repas chez mémé SAUCISSONS": "D,15"
+    "R,Le repas chez mémé SAUCISSONS": "D,15",
+    "V,Montélimar": "N,215"
   },
   "V,Lyon": {
     "V,Grenoble": "A,112",

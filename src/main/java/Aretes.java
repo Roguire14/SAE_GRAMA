@@ -1,10 +1,10 @@
 public class Aretes {
-    private char typarete;
+    private String typarete;
     private int distance;
     private Sommets sommetA;
     private Sommets sommmetB;
 
-    public Aretes(char typarete, int distance, Sommets sommetA, Sommets sommmetB){
+    public Aretes(String typarete, int distance, Sommets sommetA, Sommets sommmetB){
         this.typarete = typarete;
         this.distance = distance;
         this.sommetA = sommetA;
@@ -15,7 +15,7 @@ public class Aretes {
         return distance;
     }
 
-    public char getTyparete() {
+    public String getTyparete() {
         return typarete;
     }
 

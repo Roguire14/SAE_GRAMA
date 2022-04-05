@@ -1,15 +1,15 @@
 import java.util.ArrayList;
 
 public class Sommets {
-    private char type;
+    private String type;
     private String name;
 
-    public Sommets(char type, String name){
+    public Sommets(String type, String name){
         this.type = type;
         this.name = name;
     }
 
-    public char getType() {
+    public String getType() {
         return type;
     }
 
