@@ -1,5 +1,5 @@
 {
-  "V,Ambérieu-en-Bugey": {
+    "V,Ambérieu-en-Bugey": {
     "V,Bourg-en-Bresse": [
       "A,37",
       "D,32"
@@ -21,7 +21,7 @@
     "V,Montélimar": "N,42"
   },
   "V,Bourg-en-Bresse": {
-    "V,Valence": "A,42",
+    "V,Macon": "A,42",
     "V,Ambérieu-en-Bugey": [
       "A,37",
       "D,32"
@@ -88,7 +88,8 @@
     "V,Ambérieu-en-Bugey": "A,35",
     "V,Lagnieu": "A,27",
     "V,Lyon": "A,24",
-    "R,Antica Trattoria": "D,3"
+    "R,Antica Trattoria": "D,3",
+    "V,Villars les Dombes": "D,19"
   },
   "V,Roanne": {
     "V,Lyon": [

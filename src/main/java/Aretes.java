@@ -23,7 +23,7 @@ public class Aretes {
         return sommetA;
     }
 
-    public Sommets getSommmetB() {
+    public Sommets getSommetB() {
         return sommmetB;
     }
 
@@ -35,9 +35,5 @@ public class Aretes {
                 ", sommetA=" + sommetA +
                 ", sommmetB=" + sommmetB +
                 '}';
-    }
-
-    public void getInfos(){
-        System.out.println("Il existe un lien entre "+sommetA.getName()+" et "+sommmetB.getName()+" qui fait "+distance+" km de type "+typarete);
     }
 }

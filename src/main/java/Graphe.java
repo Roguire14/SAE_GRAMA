@@ -73,10 +73,9 @@ public class Graphe {
     }
 
     public void afficheStock(){
-        for(int i=0; i< graphe.size();i++){
-            ArrayList<Aretes> list = graphe.get(i);
-            for(int j = 0; j< list.size(); j++){
-                System.out.println(list.get(j).toString());
+        for(ArrayList<Aretes> list : graphe){
+            for(Aretes aretes : list){
+                System.out.println(aretes.toString());
             }
         }
     }
@@ -84,11 +83,11 @@ public class Graphe {
     public void infoSommet(String sommets){
         if(sommetExiste(sommets)) {
             System.out.println(sommets + " est lié avec:");
-            for (int i = 0; i < graphe.size(); i++) {
-                for (int j = 0; j < graphe.get(i).size(); j++) {
-                    if (graphe.get(i).get(j).getSommetA().getName().equals(sommets)) {
-                        Aretes found = graphe.get(i).get(j);
-                        System.out.println("    " + found.getSommmetB().getName() + " qui est de type "+found.getSommmetB().getType()+" par " + found.getTyparete() + " de distance " + found.getDistance() + " km");
+            for (ArrayList<Aretes> list: graphe) {
+                for (Aretes aretes: list) {
+                    if (aretes.getSommetA().getName().equals(sommets)) {
+                        Aretes found = aretes;
+                        System.out.println("    " + found.getSommetB().getName() + " qui est un.e "+getTypeFull(found.getSommetB().getType())+" par un.e " + getTypeFull(found.getTyparete()) + " de distance " + found.getDistance() + " km");
                     }
                 }
             }
@@ -97,13 +96,57 @@ public class Graphe {
         }
     }
 
-    private boolean sommetExiste(String sommet){
-        boolean existe = false;
-        for(int i =0;i<graphe.size();i++) {
-            for (int j = 0; j < graphe.get(i).size(); j++) {
-                if (graphe.get(i).get(j).getSommetA().getName().equals(sommet)) existe = true;
+    public void infoSommet(Sommets sommets){
+        if(sommetExiste(sommets)){
+            System.out.println(sommets.getName()+" est lié avec: ");
+            for(ArrayList<Aretes> list : graphe){
+                for(Aretes aretes : list){
+                    if(aretes.getSommetA().getName().equals(sommets.getName())){
+                        Aretes found = aretes;
+                        System.out.println("    " + found.getSommetB().getName() + " qui est un.e "+getTypeFull(found.getSommetB().getType())+" par un.e " + getTypeFull(found.getTyparete()) + " de distance " + found.getDistance() + " km");
+                    }
+                }
             }
+
+        }
+    }
+
+    private boolean sommetExiste(Object sommet){
+        boolean existe = false;
+        if(sommet instanceof String) {
+            for (ArrayList<Aretes> list : graphe) {
+                for (Aretes aretes : list) {
+                    if (aretes.getSommetA().getName().equals(sommet)) existe = true;
+                    if (existe) break;
+                }
+            }
+        }else if(sommet instanceof Sommets){
+            return sommetExiste(((Sommets) sommet).getName());
         }
         return existe;
+    }
+
+    private String getTypeFull(String type){
+        String result = null;
+        switch (type){
+            case "V":
+                result = "ville";
+                break;
+            case "L":
+                result = "centre de loisir";
+                break;
+            case "R":
+                result = "restaurant";
+                break;
+            case "A":
+                result = "autoroute";
+                break;
+            case "D":
+                result = "départementale";
+                break;
+            case "N":
+                result = "nationale";
+                break;
+        }return result;
     }
 }
