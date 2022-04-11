@@ -4,7 +4,10 @@ public class TestSAE {
     public static void main(String args[]){
 
         Graphe graphe = new Graphe();
-//        graphe.afficheStock();
-        graphe.infoSommet("Lyon");
+//        graphe.afficheElt("L");
+//        System.out.println("");
+//        graphe.afficheElt("A");
+        graphe.getSommets();
+        graphe.getAretes();
     }
 }

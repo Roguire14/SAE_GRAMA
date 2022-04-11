@@ -1,35 +1,35 @@
 {
-    "V,Ambérieu-en-Bugey": {
+    "V,Amberieu-en-Bugey": {
     "V,Bourg-en-Bresse": [
       "A,37",
       "D,32"
     ],
-    "V,Chambéry": "D,84",
+    "V,Chambery": "D,84",
     "V,Villars-les-Dombes": "D,31",
     "V,Argis": "D,17",
     "V,Vaux-en-Bugey": "D,5",
     "V,Montluel": "A,35"
   },
   "V,Argis": {
-    "V,Ambérieu-en-Bugey": "D,17",
+    "V,Amberieu-en-Bugey": "D,17",
     "R,Le Refuge de l'Hermite": "D,4",
     "V,Tenay": "D,3"
   },
   "V,Aubenas": {
     "V,Lyon": "N,171",
     "V,Valence": "N,88",
-    "V,Montélimar": "N,42"
+    "V,Montelimar": "N,42"
   },
   "V,Bourg-en-Bresse": {
     "V,Macon": "A,42",
-    "V,Ambérieu-en-Bugey": [
+    "V,Amberieu-en-Bugey": [
       "A,37",
       "D,32"
     ]
   },
-  "V,Chambéry": {
+  "V,Chambery": {
     "V,Grenoble": "A,59",
-    "V,Ambérieu-en-Bugey": "D,84"
+    "V,Amberieu-en-Bugey": "D,84"
   },
   "V,Feurs": {
     "V,Roanne": "N,45",
@@ -38,19 +38,19 @@
   "V,Grenoble": {
     "V,Lyon": "A,112",
     "V,Montalieu-Vercieu": "A,101",
-    "V,Serrières-de-Briord": "A,99",
-    "V,Chambéry": "A,59",
+    "V,Serrieres-de-Briord": "A,99",
+    "V,Chambery": "A,59",
     "L,Plage des Cordeliers": "N,38"
   },
   "V,Lagnieu": {
     "V,Lyon": "A,49",
     "V,Montluel": "A,27",
-    "V,Serrières-de-Briord": "D,16",
+    "V,Serrieres-de-Briord": "D,16",
     "V,Montalieu-Vercieu": "D,14",
     "V,Vaux-en-Bugey": "D,3",
     "L,BCube Bowling": "D,3",
-    "R,Le repas chez mémé SAUCISSONS": "D,15",
-    "V,Montélimar": "N,215"
+    "R,Le repas chez meme SAUCISSONS": "D,15",
+    "V,Montelimar": "N,215"
   },
   "V,Lyon": {
     "V,Grenoble": "A,112",
@@ -63,9 +63,9 @@
     "V,Montluel": "A,24",
     "L,Bibliotheque des Barolles": "A,14",
     "V,Aubenas": "N,171",
-    "V,Montélimar": "N,152",
+    "V,Montelimar": "N,152",
     "V,Valence": "N,105",
-    "L,Métropolis Bowling, Laser/Escape Game": "N,20"
+    "L,Metropolis Bowling, Laser/Escape Game": "N,20"
   },
   "V,Macon": {
     "V,Lyon": "A,72",
@@ -75,17 +75,17 @@
   "V,Montalieu-Vercieu": {
     "V,Grenoble": "A,101",
     "V,Lagnieu": "D,14",
-    "V,Serrières-de-Briord": "D,9",
+    "V,Serrieres-de-Briord": "D,9",
     "R,L'Hestia": "D,3"
   },
-  "V,Montélimar": {
+  "V,Montelimar": {
     "V,Lagnieu": "N,215",
     "V,Lyon": "N,152",
     "V,Aubenas": "N,42",
     "L,Camping Nature Parc L'ardechois": "N,54"
   },
   "V,Montluel": {
-    "V,Ambérieu-en-Bugey": "A,35",
+    "V,Amberieu-en-Bugey": "A,35",
     "V,Lagnieu": "A,27",
     "V,Lyon": "A,24",
     "R,Antica Trattoria": "D,3",
@@ -100,7 +100,7 @@
     "V,Feurs": "N,45",
     "R,Le bouchon de la 7": "N,32"
   },
-  "V,Serrières-de-Briord": {
+  "V,Serrieres-de-Briord": {
     "V,Grenoble": "A,99",
     "V,Lagnieu": "D,16",
     "V,Montalieu-Vercieu": "D,9"
@@ -113,12 +113,12 @@
     "V,Aubenas": "N,88"
   },
   "V,Vaux-en-Bugey": {
-    "V,Ambérieu-en-Bugey": "D,5",
+    "V,Amberieu-en-Bugey": "D,5",
     "V,Lagnieu": "D,3",
     "L,BCube Bowling": "D,1"
   },
   "V,Villars-les-Dombes": {
-    "V,Ambérieu-en-Bugey": "D,31",
+    "V,Amberieu-en-Bugey": "D,31",
     "V,Montluel": "D,19",
     "L,Parc des Oiseaux": "D,2"
   },
@@ -130,9 +130,9 @@
     "B,Lyon": "A,14"
   },
   "L,Camping Nature Parc L'ardechois": {
-    "V,Montélimar": "N,54"
+    "V,Montelimar": "N,54"
   },
-  "L,Métropolis Bowling, Laser/Escape Game": {
+  "L,Metropolis Bowling, Laser/Escape Game": {
     "V,Lyon": "N,20"
   },
   "L,Parc des Oiseaux": {
@@ -156,7 +156,7 @@
   "R,Le Refuge de l'Hermite": {
     "V,Argis": "D,4"
   },
-  "R,Le repas chez mémé SAUCISSONS": {
+  "R,Le repas chez meme SAUCISSONS": {
     "V,Lagnieu": "D,15"
   }
 }
