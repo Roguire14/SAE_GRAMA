@@ -82,9 +82,9 @@ public class Graphe {
             for (Aretes aretes: linkedList) {
                 if (aretes.getSommetA().getName().equals(sommets)) {
                     Aretes found = aretes;
-                    System.out.println("    " + found.getSommetB().getName() + " qui est "+getTypeFull(found.getSommetB().getType())+" par " + getTypeFull(found.getTyparete()) + " de distance " + found.getDistance() + " km");
+                    System.out.println("    " + found.getSommetB().getName() + " qui est "+getTypeFull(found.getSommetB().getType(),1)+" par " + getTypeFull(found.getTyparete(),1) + " de distance " + found.getDistance() + " km");
                 }
-                }
+            }
         }else
             System.out.println("Aucun sommet de ce nom n'existe");
     }
@@ -106,26 +106,52 @@ public class Graphe {
         return existe;
     }
 
-    private String getTypeFull(String type){
+    private String getTypeFull(String type,int opt){
         String result = null;
-        switch (type){
-            case "V":
-                result = "une ville";
+        switch(opt) {
+            case 1:
+                switch (type) {
+                    case "V":
+                        result = "une ville";
+                        break;
+                    case "L":
+                        result = "un centre de loisir";
+                        break;
+                    case "R":
+                        result = "un restaurant";
+                        break;
+                    case "A":
+                        result = "une autoroute";
+                        break;
+                    case "D":
+                        result = "une départementale";
+                        break;
+                    case "N":
+                        result = "une nationale";
+                        break;
+                }
                 break;
-            case "L":
-                result = "un centre de loisir";
-                break;
-            case "R":
-                result = "un restaurant";
-                break;
-            case "A":
-                result = "une autoroute";
-                break;
-            case "D":
-                result = "une départementale";
-                break;
-            case "N":
-                result = "une nationale";
+            case 2:
+                switch (type) {
+                    case "V":
+                        result = "ville";
+                        break;
+                    case "L":
+                        result = "centre de loisir";
+                        break;
+                    case "R":
+                        result = "restaurant";
+                        break;
+                    case "A":
+                        result = "autoroute";
+                        break;
+                    case "D":
+                        result = "départementale";
+                        break;
+                    case "N":
+                        result = "nationale";
+                        break;
+                }
                 break;
         }return result;
     }
@@ -238,5 +264,49 @@ public class Graphe {
                     sommetsTraites.add(aretes.getSommetA());
                     System.out.println(aretes.getSommetA());
                 }
+    }
+
+    public void affNbType(String type){
+        System.out.println("Il y a " +getNbType(type)+" "+getTypeFull(type,2));
+    }
+
+    private int getNbType(String type) {
+        int compteur = 0;
+        switch(type){
+            case "V":
+            case "R":
+            case "L":
+                compteur = countType(type,2);
+                break;
+            case "N":
+            case "A":
+            case "D":
+                compteur = countType(type,1);
+                break;
+        }return compteur;
+    }
+
+    private int countType(String type,int opt) {
+        int cpt=0;
+        switch(opt) {
+            case 1:
+                for (ArrayList<Aretes> list : graphe)
+                    for (Aretes aretes : list)
+                        if (aretes.getTyparete().equals(type))
+                            cpt++;
+                cpt=cpt/2;
+                break;
+            case 2:
+                LinkedList<Sommets> sommetsTraite = new LinkedList<>();
+                for(ArrayList<Aretes> list: graphe)
+                    for(Aretes aretes:list)
+                        if(!sommetsTraite.contains(aretes.getSommetA())&&aretes.getSommetA().getType().equals(type)) {
+                            cpt++;
+                            sommetsTraite.add(aretes.getSommetA());
+                        }
+                break;
+        }
+        return cpt;
+
     }
 }

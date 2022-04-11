@@ -7,7 +7,8 @@ public class TestSAE {
 //        graphe.afficheElt("L");
 //        System.out.println("");
 //        graphe.afficheElt("A");
-        graphe.getSommets();
-        graphe.getAretes();
+//        graphe.getSommets();
+//        graphe.getAretes();
+//        graphe.affNbType("");
     }
 }
