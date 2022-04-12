@@ -93,17 +93,18 @@ public class Graphe {
         infoSommet(sommets.getName());
     }
 
-    private boolean sommetExiste(Object sommet){
+    private boolean sommetExiste(String sommet){
         boolean existe = false;
-        if(sommet instanceof String)
-            for (ArrayList<Aretes> list : graphe)
-                for (Aretes aretes : list) {
-                    if (aretes.getSommetA().getName().equals(sommet)) existe = true;
-                    if (existe) break;
-                }
-        else if(sommet instanceof Sommets)
-            return sommetExiste(((Sommets) sommet).getName());
+        for (ArrayList<Aretes> list : graphe)
+            for (Aretes aretes : list) {
+                if (aretes.getSommetA().getName().equals(sommet)) existe = true;
+                if (existe) break;
+            }
         return existe;
+    }
+
+    private boolean sommetExiste(Sommets sommets){
+        return sommetExiste(sommets.getName());
     }
 
     private String getTypeFull(String type,int opt){
@@ -218,22 +219,22 @@ public class Graphe {
             case "A":
             case "D":
             case "N":
-                LinkedList<Aretes> aretesLinkedList = getTypeAretes(type);
+                List<Aretes> aretesLinkedList = getTypeAretes(type);
                 for(Aretes aretes: aretesLinkedList)
                     System.out.println(aretes);
                 break;
             case "V":
             case "L":
             case "R":
-                LinkedList<Sommets> sommetsLinkedList = getTypeVille(type);
+                List<Sommets> sommetsLinkedList = getTypeVille(type);
                 for(Sommets sommets: sommetsLinkedList)
                     System.out.println(sommets);
                 break;
         }
     }
 
-    private LinkedList<Sommets> getTypeVille(String type) {
-        LinkedList<Sommets> linkedList = new LinkedList<>();
+    private List<Sommets> getTypeVille(String type) {
+        List<Sommets> linkedList = new LinkedList<>();
         List<Sommets> sommetTraite = new LinkedList<>();
         for (ArrayList<Aretes> list : graphe)
             for (Aretes aretes : list)
@@ -244,8 +245,8 @@ public class Graphe {
         return linkedList;
     }
 
-    private LinkedList<Aretes> getTypeAretes(String type){
-        LinkedList<Aretes> linkedList = new LinkedList<>();
+    private List<Aretes> getTypeAretes(String type){
+        List<Aretes> linkedList = new LinkedList<>();
         List<Aretes> sommetsTraite = new LinkedList<>();
         for(ArrayList<Aretes> list: graphe)
             for(Aretes aretes: list)
@@ -257,7 +258,7 @@ public class Graphe {
     }
 
     public void getSommets(){
-        LinkedList<Sommets> sommetsTraites = new LinkedList<>();
+        List<Sommets> sommetsTraites = new LinkedList<>();
         for(ArrayList<Aretes> list : graphe)
             for(Aretes aretes: list)
                 if(!sommetsTraites.contains(aretes.getSommetA())){
@@ -297,7 +298,7 @@ public class Graphe {
                 cpt=cpt/2;
                 break;
             case 2:
-                LinkedList<Sommets> sommetsTraite = new LinkedList<>();
+                List<Sommets> sommetsTraite = new LinkedList<>();
                 for(ArrayList<Aretes> list: graphe)
                     for(Aretes aretes:list)
                         if(!sommetsTraite.contains(aretes.getSommetA())&&aretes.getSommetA().getType().equals(type)) {
