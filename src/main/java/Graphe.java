@@ -7,7 +7,7 @@ import java.io.*;
 import java.util.*;
 
 public class Graphe {
-    private ArrayList<ArrayList<Aretes>> graphe;
+    private final ArrayList<ArrayList<Aretes>> graphe;
 
     public Graphe(){
         this.graphe = load();
