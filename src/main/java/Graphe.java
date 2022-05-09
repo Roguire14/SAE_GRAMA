@@ -95,11 +95,14 @@ public class Graphe {
 
     private boolean sommetExiste(String sommet){
         boolean existe = false;
-        for (ArrayList<Aretes> list : graphe)
-            for (Aretes aretes : list) {
+        ArrayList<Aretes> list;
+        int i =0;
+        while(!existe&&i<graphe.size()) {
+            list=graphe.get(i);
+            for (Aretes aretes : list)
                 if (aretes.getSommetA().getName().equals(sommet)) existe = true;
-                if (existe) break;
-            }
+            i++;
+        }
         return existe;
     }
 
