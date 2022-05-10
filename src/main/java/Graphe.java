@@ -7,7 +7,7 @@ import java.io.*;
 import java.util.*;
 
 public class Graphe {
-    private final ArrayList<ArrayList<Aretes>> graphe;
+    public final ArrayList<ArrayList<Aretes>> graphe;
 
     public Graphe(){
         this.graphe = load();
@@ -217,6 +217,17 @@ public class Graphe {
         return getVoisins(sommets.getName());
     }
 
+    public LinkedList<String> getVoisins(String sommets, String type){
+        List<Aretes> aretesList = getVoisins(sommets);
+        LinkedList<String> res = new LinkedList<>();
+        for(Aretes aretes: aretesList)
+            if(aretes.getSommetB().getType().equals(type)) {
+                res.add(aretes.getSommetB().getName());
+                System.out.println(aretes.getSommetB().getName());
+            }
+        return res;
+    }
+
     public void afficheElt(String type){
         switch(type){
             case "A":
@@ -312,5 +323,14 @@ public class Graphe {
         }
         return cpt;
 
+    }
+
+    public void infoAretes(Aretes aretes){
+        for(ArrayList<Aretes> list: graphe)
+            for(Aretes aretes1: list){
+                if(aretes1.getSommetA().getName().equals(aretes.getSommetA().getName())&&aretes1.getSommetB().getName().equals(aretes.getSommetB().getName())) {
+                    System.out.println(aretes1);
+                }
+            }
     }
 }
