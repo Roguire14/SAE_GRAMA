@@ -1,3 +1,5 @@
+package Moteur;
+
 public class Aretes {
     private String typarete;
     private int distance;
@@ -29,7 +31,7 @@ public class Aretes {
 
     @Override
     public String toString() {
-        return "Aretes{" +
+        return "Moteur.Aretes{" +
                 "typarete='" + typarete + '\'' +
                 ", distance=" + distance +
                 ", sommetA=" + sommetA +

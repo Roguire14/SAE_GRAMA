@@ -1,3 +1,6 @@
+package Moteur;
+
+import Interface.MainWindow;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -7,61 +10,79 @@ import java.io.*;
 import java.util.*;
 
 public class Graphe {
-    public final ArrayList<ArrayList<Aretes>> graphe;
+    private final ArrayList<ArrayList<Aretes>> graphe;
+    private int status=0;
+    private MainWindow window;
 
-    public Graphe(){
-        this.graphe = load();
+    public Graphe(MainWindow window,File file){
+        this.graphe = load(file.getName());
+        this.window = window;
     }
 
-    private ArrayList load(){
+    public int getStatus() {
+        return status;
+    }
+
+    private Optional<String> getExtension(String filename){
+        return Optional.ofNullable(filename)
+                .filter(f -> f.contains("."))
+                .map(f -> f.substring(filename.lastIndexOf(".") + 1));
+    }
+
+    private ArrayList load(String filename){
         JSONParser parser = new JSONParser();
         ArrayList<ArrayList<Aretes>> stock = new ArrayList<>();
         Aretes aretes = null;
 
         try {
-            JSONObject jsonObject = (JSONObject) parser.parse(new FileReader("graphe-MAP.json"));
+            if(getExtension(filename).get().equals("json")){
+                JSONObject jsonObject = (JSONObject) parser.parse(new FileReader(filename));
 
-            for(Iterator iterator = jsonObject.keySet().iterator(); iterator.hasNext();){
-                String key = (String) iterator.next();
+                for (Iterator iterator = jsonObject.keySet().iterator(); iterator.hasNext(); ) {
+                    String key = (String) iterator.next();
 //                System.out.println(key);
-                String[] info = key.split(",");
-                String type_sommet = info[0];
-                String nom_sommet = info[1];
-                Sommets sommets = new Sommets(type_sommet,nom_sommet);
-                if(jsonObject.get(key)instanceof JSONObject){
-                    ArrayList<Aretes> list = new ArrayList<>();
-                    JSONObject jsonObject1 = ((JSONObject)jsonObject.get(key));
-                    for(Iterator iterator1 = jsonObject1.keySet().iterator(); iterator1.hasNext();){
-                        String key1 = (String) iterator1.next();
-                        String[] info2 = key1.split(",");
-                        String type_sommet2 = info2[0];
-                        String nom_sommet2 = info2[1];
-                        Sommets sommets1 = new Sommets(type_sommet2,nom_sommet2);
+                    String[] info = key.split(",");
+                    String type_sommet = info[0];
+                    String nom_sommet = info[1];
+                    Sommets sommets = new Sommets(type_sommet, nom_sommet);
+                    if (jsonObject.get(key) instanceof JSONObject) {
+                        ArrayList<Aretes> list = new ArrayList<>();
+                        JSONObject jsonObject1 = ((JSONObject) jsonObject.get(key));
+                        for (Iterator iterator1 = jsonObject1.keySet().iterator(); iterator1.hasNext(); ) {
+                            String key1 = (String) iterator1.next();
+                            String[] info2 = key1.split(",");
+                            String type_sommet2 = info2[0];
+                            String nom_sommet2 = info2[1];
+                            Sommets sommets1 = new Sommets(type_sommet2, nom_sommet2);
 //                        System.out.println("   "+key1);
-                        if(jsonObject1.get(key1) instanceof JSONArray){
-                            JSONArray jsonArray = ((JSONArray)jsonObject1.get(key1));
-                            for(int i = 0; i<jsonArray.size();i++){
+                            if (jsonObject1.get(key1) instanceof JSONArray) {
+                                JSONArray jsonArray = ((JSONArray) jsonObject1.get(key1));
+                                for (int i = 0; i < jsonArray.size(); i++) {
 //                                System.out.println("      "+jsonArray.get(i));
-                                String[] info3 = jsonArray.get(i).toString().split(",");
+                                    String[] info3 = jsonArray.get(i).toString().split(",");
+                                    String type_arete = info3[0];
+                                    int distance_arete = Integer.valueOf(info3[1]);
+                                    aretes = new Aretes(type_arete, distance_arete, sommets, sommets1);
+                                    list.add(aretes);
+                                }
+                            } else {
+//                            System.out.println("      "+jsonObject1.get(key1));
+                                String[] info3 = jsonObject1.get(key1).toString().split(",");
                                 String type_arete = info3[0];
                                 int distance_arete = Integer.valueOf(info3[1]);
-                                aretes = new Aretes(type_arete,distance_arete,sommets,sommets1);
+                                aretes = new Aretes(type_arete, distance_arete, sommets, sommets1);
                                 list.add(aretes);
                             }
-                        }else{
-//                            System.out.println("      "+jsonObject1.get(key1));
-                            String[] info3 = jsonObject1.get(key1).toString().split(",");
-                            String type_arete = info3[0];
-                            int distance_arete = Integer.valueOf(info3[1]);
-                            aretes = new Aretes(type_arete,distance_arete,sommets,sommets1);
-                            list.add(aretes);
                         }
-                    }stock.add(list);
+                        stock.add(list);
+                    }
                 }
+                status = 1;
             }
 
         } catch (FileNotFoundException e){
-            e.printStackTrace();
+            System.out.println("Fichier pas trouvé");
+//            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ParseException e) {
@@ -95,13 +116,11 @@ public class Graphe {
 
     private boolean sommetExiste(String sommet){
         boolean existe = false;
-        ArrayList<Aretes> list;
-        int i =0;
-        while(!existe&&i<graphe.size()) {
-            list=graphe.get(i);
+        ArrayList<Aretes> list = null;
+        for(int i = 0; !existe&&i < graphe.size();i++){
+            list = graphe.get(i);
             for (Aretes aretes : list)
                 if (aretes.getSommetA().getName().equals(sommet)) existe = true;
-            i++;
         }
         return existe;
     }

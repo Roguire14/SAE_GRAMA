@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+package Moteur;
 
 public class Sommets {
     private String type;
@@ -19,7 +19,7 @@ public class Sommets {
 
     @Override
     public String toString() {
-        return "Sommets{" +
+        return "Moteur.Sommets{" +
                 "type=" + type +
                 ", name='" + name + '\'' +
                 '}';
