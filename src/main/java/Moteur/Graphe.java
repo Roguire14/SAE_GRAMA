@@ -96,18 +96,23 @@ public class Graphe {
                 System.out.println(aretes);
     }
 
-    public void infoSommet(String sommets){
+    public String infoSommet(String sommets){
+        StringBuffer buffer = new StringBuffer();
         if(sommetExiste(sommets)) {
             System.out.println(sommets + " est lié avec:");
+            buffer.append(sommets + " est lié avec:\n");
             LinkedList<Aretes> linkedList = getVoisins(sommets);
             for (Aretes aretes: linkedList) {
                 if (aretes.getSommetA().getName().equals(sommets)) {
                     Aretes found = aretes;
                     System.out.println("    " + found.getSommetB().getName() + " qui est "+getTypeFull(found.getSommetB().getType(),1)+" par " + getTypeFull(found.getTyparete(),1) + " de distance " + found.getDistance() + " km");
+                    buffer.append("    " + found.getSommetB().getName() + " qui est "+getTypeFull(found.getSommetB().getType(),1)+" par " + getTypeFull(found.getTyparete(),1) + " de distance " + found.getDistance() + " km\n");
                 }
             }
-        }else
+        }else {
             System.out.println("Aucun sommet de ce nom n'existe");
+            buffer.append("Aucun sommet de ce nom n'existe");
+        }return buffer.toString();
     }
 
     public void infoSommet(Sommets sommets){

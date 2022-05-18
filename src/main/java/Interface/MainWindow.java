@@ -5,6 +5,10 @@ import Moteur.Graphe;
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 import java.awt.*;
 import java.io.File;
 
@@ -12,22 +16,10 @@ public class MainWindow extends JFrame {
 
     private Graphe engine;
 
-    public MainWindow(){
+    public MainWindow(File file){
         super();
-        engine = new Graphe(this,leChooser());
+        engine = new Graphe(this,file);
         constrFen();
-    }
-
-    private File leChooser(){
-
-        JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir")));
-        FileFilter filter = new FileNameExtensionFilter("JSON Files","json");
-        FileFilter filter1 = new FileNameExtensionFilter("CSV Files","csv");
-        fileChooser.addChoosableFileFilter(filter); fileChooser.addChoosableFileFilter(filter1);
-        fileChooser.setAcceptAllFileFilterUsed(false);
-        fileChooser.showOpenDialog(this);
-        return fileChooser.getSelectedFile();
     }
 
     private void constrFen() {
@@ -56,6 +48,18 @@ public class MainWindow extends JFrame {
         }status.setAlignmentX(Component.CENTER_ALIGNMENT);
         main.add(Box.createRigidArea(new Dimension(0,20)));
         main.add(status);
+
+        JTextPane test = new JTextPane();
+        try{
+            SimpleAttributeSet centrer = new SimpleAttributeSet();
+            StyleConstants.setAlignment(centrer, StyleConstants.ALIGN_CENTER);
+            StyledDocument doc = test.getStyledDocument();
+            doc.insertString(doc.getLength(),engine.infoSommet("Lyon"),centrer);
+            doc.setParagraphAttributes(0,doc.getLength(),centrer,false);
+        }catch (BadLocationException e) {
+            e.printStackTrace();
+        }
+        main.add(test);
 
 
 

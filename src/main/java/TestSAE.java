@@ -1,4 +1,5 @@
 import Interface.MainWindow;
+import Interface.SelectWindow;
 import Moteur.Graphe;
 
 import javax.swing.*;
@@ -19,7 +20,7 @@ public class TestSAE {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new MainWindow();
+                new SelectWindow();
             }
         });
     }
