@@ -23,10 +23,6 @@ public class SelectWindow extends JFrame {
         setVisible(true);
     }
 
-    public void changeVisibility(){
-        setVisible(false);
-    }
-
     private JPanel constrPan() {
         JPanel main = new JPanel();
         main.setLayout(new BoxLayout(main, BoxLayout.Y_AXIS));
@@ -45,7 +41,7 @@ public class SelectWindow extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 LeFileChooser fileChooser = new LeFileChooser();
                 File file = fileChooser.getFileChooser().getSelectedFile();
-                changeVisibility();
+                dispose();
                 new MainWindow(file);
             }
         });

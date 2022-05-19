@@ -9,6 +9,7 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
+import java.util.List;
 import java.awt.*;
 import java.io.File;
 
@@ -49,19 +50,22 @@ public class MainWindow extends JFrame {
         main.add(Box.createRigidArea(new Dimension(0,20)));
         main.add(status);
 
-        JTextPane test = new JTextPane();
-        try{
-            SimpleAttributeSet centrer = new SimpleAttributeSet();
-            StyleConstants.setAlignment(centrer, StyleConstants.ALIGN_CENTER);
-            StyledDocument doc = test.getStyledDocument();
-            doc.insertString(doc.getLength(),engine.infoSommet("Lyon"),centrer);
-            doc.setParagraphAttributes(0,doc.getLength(),centrer,false);
-        }catch (BadLocationException e) {
-            e.printStackTrace();
+//        JTextPane test = new JTextPane();
+//        try{
+//            SimpleAttributeSet centrer = new SimpleAttributeSet();
+//            StyleConstants.setAlignment(centrer, StyleConstants.ALIGN_CENTER);
+//            StyledDocument doc = test.getStyledDocument();
+//            doc.insertString(doc.getLength(),engine.infoSommet("Lyon"),centrer);
+//            doc.setParagraphAttributes(0,doc.getLength(),centrer,false);
+//        }catch (BadLocationException e) {
+//            e.printStackTrace();
+//        }
+        List<String> test = engine.infoSommet("Lyon");
+        for(String s: test) {
+            JLabel oui = new JLabel(s);
+            oui.setAlignmentX(Component.CENTER_ALIGNMENT);
+            main.add(oui);
         }
-        main.add(test);
-
-
 
         return main;
     }
