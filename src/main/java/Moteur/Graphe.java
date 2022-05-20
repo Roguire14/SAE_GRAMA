@@ -30,12 +30,12 @@ public class Graphe {
     }
 
     private ArrayList load(String filename){
-        JSONParser parser = new JSONParser();
         ArrayList<ArrayList<Aretes>> stock = new ArrayList<>();
         Aretes aretes = null;
 
         try {
             if(getExtension(filename).get().equals("json")){
+                JSONParser parser = new JSONParser();
                 JSONObject jsonObject = (JSONObject) parser.parse(new FileReader(filename));
 
                 for (Iterator iterator = jsonObject.keySet().iterator(); iterator.hasNext(); ) {
@@ -78,6 +78,31 @@ public class Graphe {
                     }
                 }
                 status = 1;
+            }else{
+                File file = new File(filename);
+                FileReader fileReader = new FileReader(file);
+                BufferedReader br = new BufferedReader(fileReader);
+                String line = "";
+                String[] tempArr;
+                while((line = br.readLine())!=null){
+                    ArrayList<Aretes> list = new ArrayList<>();
+                    tempArr = line.split(":",2);
+                    String type = tempArr[0].split(",")[0];
+                    String name = tempArr[0].split(",")[1];
+                    Sommets sommetA = new Sommets(type,name);
+                    String[] sommetsB= tempArr[1].split(";");
+                    for(String sommetB: sommetsB){
+                        String[] infoSommet= sommetB.split("::");
+                        String typeArr = infoSommet[0].split(",")[0];
+                        int distArr = Integer.valueOf(infoSommet[0].split(",")[1]);
+                        String typeSommetB = infoSommet[1].split(",")[0];
+                        String nomSommetB = infoSommet[1].split(",")[1];
+                        Sommets VsommetB = new Sommets(typeSommetB,nomSommetB);
+                        Aretes aretes1 = new Aretes(typeArr,distArr,sommetA,VsommetB);
+                        list.add(aretes1);
+                    }
+                    stock.add(list);
+                }status = 1;
             }
 
         } catch (FileNotFoundException e){
@@ -187,7 +212,8 @@ public class Graphe {
     public void JSONintoCSV(String name){
         List<Sommets> sommetsTraite = new ArrayList<Sommets>();
         try {
-            PrintWriter writer = new PrintWriter(name + ".csv");
+            if(!name.endsWith(".csv")) name = name+".csv";
+            PrintWriter writer = new PrintWriter(name);
             for (ArrayList<Aretes> list : graphe) {
                 for (Aretes aretes : list) {
                     if (!sommetsTraite.contains(aretes.getSommetA())) {

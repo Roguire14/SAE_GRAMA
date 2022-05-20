@@ -39,13 +39,14 @@ public class SelectWindow extends JFrame {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                dispose();
                 LeFileChooser fileChooser = new LeFileChooser();
                 File file = fileChooser.getFileChooser().getSelectedFile();
-                dispose();
                 new MainWindow(file);
             }
         });
         main.add(button);
+
 
         return main;
     }

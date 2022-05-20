@@ -67,6 +67,10 @@ public class MainWindow extends JFrame {
             main.add(oui);
         }
 
+        JButton button1 = new JButton("Clique ici pour créer une save du JSON en CSV");
+        button1.addActionListener(e -> engine.JSONintoCSV("oui le csv.csv"));
+        main.add(button1);
+//        JButton button = new
         return main;
     }
 
