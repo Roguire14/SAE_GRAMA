@@ -10,11 +10,12 @@ import java.io.*;
 import java.util.*;
 
 public class Graphe {
-    private final ArrayList<ArrayList<Aretes>> graphe;
-    private int status=0;
+    private ArrayList<ArrayList<Aretes>> graphe;
+    private static int status;
     private MainWindow window;
 
     public Graphe(MainWindow window,File file){
+        status = 0;
         this.graphe = load(file.getName());
         this.window = window;
     }
@@ -107,11 +108,13 @@ public class Graphe {
 
         } catch (FileNotFoundException e){
             System.out.println("Fichier pas trouvé");
-//            e.printStackTrace();
+            return stock;
         } catch (IOException e) {
-            e.printStackTrace();
+            return stock;
         } catch (ParseException e) {
-            e.printStackTrace();
+            return stock;
+        }catch (ArrayIndexOutOfBoundsException e){
+            return stock;
         }return stock;
     }
 
@@ -278,27 +281,29 @@ public class Graphe {
         return res;
     }
 
-    public void afficheElt(String type){
-        switch(type){
+    public List<Object> afficheElt(String type) {
+        List<Object> objectList = null;
+        switch (type) {
             case "A":
             case "D":
             case "N":
-                List<Aretes> aretesLinkedList = getTypeAretes(type);
-                for(Aretes aretes: aretesLinkedList)
+                objectList = getTypeAretes(type);
+                for (Object aretes : objectList)
                     System.out.println(aretes);
                 break;
             case "V":
             case "L":
             case "R":
-                List<Sommets> sommetsLinkedList = getTypeVille(type);
-                for(Sommets sommets: sommetsLinkedList)
+                objectList = getTypeVille(type);
+                for (Object sommets : objectList)
                     System.out.println(sommets);
                 break;
         }
+        return objectList;
     }
 
-    private List<Sommets> getTypeVille(String type) {
-        List<Sommets> linkedList = new LinkedList<>();
+    private List<Object> getTypeVille(String type) {
+        List<Object> linkedList = new LinkedList<>();
         List<Sommets> sommetTraite = new LinkedList<>();
         for (ArrayList<Aretes> list : graphe)
             for (Aretes aretes : list)
@@ -309,8 +314,8 @@ public class Graphe {
         return linkedList;
     }
 
-    private List<Aretes> getTypeAretes(String type){
-        List<Aretes> linkedList = new LinkedList<>();
+    private List<Object> getTypeAretes(String type){
+        List<Object> linkedList = new LinkedList<>();
         List<Aretes> sommetsTraite = new LinkedList<>();
         for(ArrayList<Aretes> list: graphe)
             for(Aretes aretes: list)
@@ -335,7 +340,7 @@ public class Graphe {
         System.out.println("Il y a " +getNbType(type)+" "+getTypeFull(type,2));
     }
 
-    private int getNbType(String type) {
+    public int getNbType(String type) {
         int compteur = 0;
         switch(type){
             case "V":
