@@ -278,13 +278,17 @@ public class Graphe {
 
     private List<Object> getAretesOfType(String type){
         List<Object> linkedList = new LinkedList<>();
-        List<Aretes> sommetsTraite = new LinkedList<>();
-        for(ArrayList<Aretes> list: graphe)
-            for(Aretes aretes: list)
-                if(aretes.getTyparete().equals(type)&&!sommetsTraite.contains(aretes)) {
+        List<String> sommetsTraite = new LinkedList<>();
+        for(ArrayList<Aretes> list: graphe) {
+            for (Aretes aretes : list) {
+                System.out.println(aretes);
+                System.out.println(sommetsTraite.contains(aretes.getSommetA()));
+                if (aretes.getTyparete().equals(type) && !sommetsTraite.contains(aretes.getSommetB().getName())) {
                     linkedList.add(aretes);
-                    sommetsTraite.add(aretes);
+                    sommetsTraite.add(aretes.getSommetA().getName());
                 }
+            }
+        }
         return linkedList;
     }
 
