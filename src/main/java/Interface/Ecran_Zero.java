@@ -32,39 +32,62 @@ public class Ecran_Zero extends JFrame {
         JPanel main = new JPanel();
         main.add(Box.createRigidArea(new Dimension(0,30)));
         JPanel requete = new JPanel();
-        requete.setLayout(new GridLayout(1,2,30,30));
+        requete.setLayout(new GridLayout(2,2,30,30));
         requete.setMaximumSize(new Dimension(250,350));
 
         String[] choixTypeTab = {"Ville","Centre de loisir","Restaurant"};
+        String[] choixArrTab= {"Autoroute","Nationale","Départementale"};
         JComboBox choixTypeBox = new JComboBox<>(choixTypeTab);
+        JComboBox choixArrBox = new JComboBox<>(choixArrTab);
+        choixArrBox.setSelectedItem(null);
         choixTypeBox.setSelectedItem(null);
 
-        JComboBox choixSelonPrevious = new JComboBox<>();
+        JComboBox choixSelonPreviousSommet = new JComboBox<>();
         choixTypeBox.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
                 if(e.getStateChange()==ItemEvent.SELECTED){
                     if ("Ville".equals(choixTypeBox.getSelectedItem())) {
-                        choixSelonPrevious.removeAllItems();
+                        choixSelonPreviousSommet.removeAllItems();
                         for (Object o : engine.afficheElt("V"))
                             if (o instanceof Sommets)
-                                choixSelonPrevious.addItem(((Sommets) o).getName());
+                                choixSelonPreviousSommet.addItem(((Sommets) o).getName());
                     }
                     if("Centre de loisir".equals(choixTypeBox.getSelectedItem())) {
-                        choixSelonPrevious.removeAllItems();
+                        choixSelonPreviousSommet.removeAllItems();
                         for (Object o : engine.afficheElt("L"))
                             if (o instanceof Sommets)
-                                choixSelonPrevious.addItem(((Sommets) o).getName());
+                                choixSelonPreviousSommet.addItem(((Sommets) o).getName());
                     }
                     if("Restaurant".equals(choixTypeBox.getSelectedItem())){
-                        choixSelonPrevious.removeAllItems();
-                        for(Object o: engine.afficheElt("R")) if(o instanceof Sommets) choixSelonPrevious.addItem(((Sommets) o).getName());
+                        choixSelonPreviousSommet.removeAllItems();
+                        for(Object o: engine.afficheElt("R")) if(o instanceof Sommets) choixSelonPreviousSommet.addItem(((Sommets) o).getName());
                     }
                 }
             }
         });
+
+        JComboBox choixSelonPreviousArrete = new JComboBox<>();
+        choixArrBox.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if(e.getStateChange()==ItemEvent.SELECTED){
+                    if(choixArrBox.getSelectedItem().equals("Autoroute")){
+                        choixSelonPreviousArrete.removeAllItems();
+                        for(Object o: engine.afficheElt("A"))
+                            if(o instanceof Aretes) {
+                                Aretes aretes = (Aretes) o;
+                                choixSelonPreviousArrete.addItem(new String(aretes.getTyparete()+" "+aretes.getSommetA().getName()+" ~ "+aretes.getSommetB().getName()));
+                            }
+                    }
+                }
+            }
+        });
+
         requete.add(choixTypeBox);
-        requete.add(choixSelonPrevious);
+        requete.add(choixSelonPreviousSommet);
+        requete.add(choixArrBox);
+        requete.add(choixSelonPreviousArrete);
         main.add(requete);
 
 

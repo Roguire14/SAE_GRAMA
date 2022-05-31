@@ -67,22 +67,29 @@ public class MainWindow extends JFrame {
             button1.setAlignmentX(CENTER_ALIGNMENT);
             main.add(button1);
         }
-
-        JMenuItem jMenuItem0 = new JMenuItem("Écran de base");
-        jMenuItem0.setEnabled(false);
+        JMenuBar menuBar = new JMenuBar();
         JMenuItem jMenuItem = new JMenuItem("Écran 0 - information 0-distance");
         jMenuItem.addActionListener(e -> new Ecran_Zero(engine));
         JMenuItem jMenuItem1 = new JMenuItem("Écran 1 - voisinnage direct -> 1-distance");
         JMenuItem jMenuItem2 = new JMenuItem("Écran 2 - voisinage à 2 sauts -> 2-distance");
         JMenuItem jMenuItem3 = new JMenuItem("Écran 3 - comparaison de sites à 2 sauts ou plus -> >= 2-distance");
         JMenu action = new JMenu("Écrans");
-        action.add(jMenuItem0);
         action.add(jMenuItem);
         action.add(jMenuItem1);
         action.add(jMenuItem2);
         action.add(jMenuItem3);
-        JMenuBar menuBar = new JMenuBar();
         menuBar.add(action);
+
+        JMenu ppt = new JMenu("Options");
+        JMenuItem ppt_1 = new JMenuItem( "Ouvrir un autre graphe");
+        ppt_1.setEnabled(false);
+        JMenuItem ppt_2 = new JMenuItem("Quitter");
+        ppt_2.addActionListener(e -> dispose());
+        ppt.add(ppt_1);
+        ppt.add(ppt_2);
+        menuBar.add(ppt);
+
+
         this.setJMenuBar(menuBar);
 
         return main;
