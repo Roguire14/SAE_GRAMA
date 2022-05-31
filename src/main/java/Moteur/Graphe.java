@@ -118,100 +118,6 @@ public class Graphe {
         }return stock;
     }
 
-    public void getAretes(){
-        for(ArrayList<Aretes> list : graphe)
-            for(Aretes aretes : list)
-                System.out.println(aretes);
-    }
-
-    public List<String> infoSommet(String sommets){
-        List<String> strings = new LinkedList();
-        if(sommetExiste(sommets)) {
-            System.out.println(sommets + " est lié avec:");
-            strings.add(sommets + " est lié avec:\n");
-            LinkedList<Aretes> linkedList = getVoisins(sommets);
-            for (Aretes aretes: linkedList) {
-                if (aretes.getSommetA().getName().equals(sommets)) {
-                    Aretes found = aretes;
-                    System.out.println("    " + found.getSommetB().getName() + " qui est "+getTypeFull(found.getSommetB().getType(),1)+" par " + getTypeFull(found.getTyparete(),1) + " de distance " + found.getDistance() + " km");
-                    strings.add("    " + found.getSommetB().getName() + " qui est "+getTypeFull(found.getSommetB().getType(),1)+" par " + getTypeFull(found.getTyparete(),1) + " de distance " + found.getDistance() + " km\n");
-                }
-            }
-        }else {
-            System.out.println("Aucun sommet de ce nom n'existe");
-            strings.add("Aucun sommet de ce nom n'existe");
-        }return strings;
-    }
-
-    public void infoSommet(Sommets sommets){
-        infoSommet(sommets.getName());
-    }
-
-    private boolean sommetExiste(String sommet){
-        boolean existe = false;
-        ArrayList<Aretes> list = null;
-        for(int i = 0; !existe&&i < graphe.size();i++){
-            list = graphe.get(i);
-            for (Aretes aretes : list)
-                if (aretes.getSommetA().getName().equals(sommet)) existe = true;
-        }
-        return existe;
-    }
-
-    private boolean sommetExiste(Sommets sommets){
-        return sommetExiste(sommets.getName());
-    }
-
-    private String getTypeFull(String type,int opt){
-        String result = null;
-        switch(opt) {
-            case 1:
-                switch (type) {
-                    case "V":
-                        result = "une ville";
-                        break;
-                    case "L":
-                        result = "un centre de loisir";
-                        break;
-                    case "R":
-                        result = "un restaurant";
-                        break;
-                    case "A":
-                        result = "une autoroute";
-                        break;
-                    case "D":
-                        result = "une départementale";
-                        break;
-                    case "N":
-                        result = "une nationale";
-                        break;
-                }
-                break;
-            case 2:
-                switch (type) {
-                    case "V":
-                        result = "ville";
-                        break;
-                    case "L":
-                        result = "centre de loisir";
-                        break;
-                    case "R":
-                        result = "restaurant";
-                        break;
-                    case "A":
-                        result = "autoroute";
-                        break;
-                    case "D":
-                        result = "départementale";
-                        break;
-                    case "N":
-                        result = "nationale";
-                        break;
-                }
-                break;
-        }return result;
-    }
-
     public void JSONintoCSV(String name){
         List<Sommets> sommetsTraite = new ArrayList<Sommets>();
         try {
@@ -220,7 +126,7 @@ public class Graphe {
             for (ArrayList<Aretes> list : graphe) {
                 for (Aretes aretes : list) {
                     if (!sommetsTraite.contains(aretes.getSommetA())) {
-                        LinkedList<Aretes> linkedList = getVoisins(aretes.getSommetA());
+                        LinkedList<Aretes> linkedList = getAretesOfSommet(aretes.getSommetA());
                         StringBuffer stringBuffer = new StringBuffer();
                         stringBuffer.append(aretes.getSommetA().getType())
                                 .append(",")
@@ -257,103 +163,57 @@ public class Graphe {
         }
     }
 
-    private LinkedList<Aretes> getVoisins(String sommets){
-        LinkedList<Aretes> aretesList = new LinkedList<>();
-        for(ArrayList<Aretes> list: graphe)
-            for(Aretes aretes : list)
-                if(aretes.getSommetA().getName().equals(sommets))
-                    aretesList.add(aretes);
-        return aretesList;
+    // /(~~~~~*****~~~~~)\
+    // --- Utilitaires ---
+    // \(~~~~~*****~~~~~)/
+
+    private boolean sommetExiste(String sommet){
+        boolean existe = false;
+        ArrayList<Aretes> list = null;
+        for(int i = 0; !existe&&i < graphe.size();i++){
+            list = graphe.get(i);
+            for (Aretes aretes : list)
+                if (aretes.getSommetA().getName().equals(sommet)) existe = true;
+        }
+        return existe;
+    }
+    private boolean sommetExiste(Sommets sommets){
+        return sommetExiste(sommets.getName());
     }
 
-    private LinkedList<Aretes> getVoisins(Sommets sommets){
-        return getVoisins(sommets.getName());
-    }
-
-    public LinkedList<String> getVoisins(String sommets, String type){
-        List<Aretes> aretesList = getVoisins(sommets);
-        LinkedList<String> res = new LinkedList<>();
-        for(Aretes aretes: aretesList)
-            if(aretes.getSommetB().getType().equals(type)) {
-                res.add(aretes.getSommetB().getName());
-                System.out.println(aretes.getSommetB().getName());
+    private String getTypeFull(String type,int opt){
+        StringBuffer result = null;
+        if(opt == 1) {
+            switch (type) {
+                case "L":
+                case "R":
+                    result.append("un ");
+                    break;
+                default:
+                    result.append("une ");
             }
-        return res;
-    }
-
-    public List<Object> afficheElt(String type) {
-        List<Object> objectList = null;
-        switch (type) {
-            case "A":
-            case "D":
-            case "N":
-                objectList = getTypeAretes(type);
-                for (Object aretes : objectList)
-                    System.out.println(aretes);
-                break;
+        }
+        switch(type) {
             case "V":
+                result.append("ville");
+                break;
             case "L":
+                result.append("centre de loisir");
+                break;
             case "R":
-                objectList = getTypeVille(type);
-                for (Object sommets : objectList)
-                    System.out.println(sommets);
+                result.append("restaurant");
+                break;
+            case "A":
+                result.append("autoroute");
+                break;
+            case "D":
+                result.append("départementale");
+                break;
+            case "N":
+                result.append("nationale");
                 break;
         }
-        return objectList;
-    }
-
-    private List<Object> getTypeVille(String type) {
-        List<Object> linkedList = new LinkedList<>();
-        List<Sommets> sommetTraite = new LinkedList<>();
-        for (ArrayList<Aretes> list : graphe)
-            for (Aretes aretes : list)
-                if (aretes.getSommetA().getType().equals(type) && !sommetTraite.contains(aretes.getSommetA())){
-                    linkedList.add(aretes.getSommetA());
-                    sommetTraite.add(aretes.getSommetA());
-                }
-        return linkedList;
-    }
-
-    private List<Object> getTypeAretes(String type){
-        List<Object> linkedList = new LinkedList<>();
-        List<Aretes> sommetsTraite = new LinkedList<>();
-        for(ArrayList<Aretes> list: graphe)
-            for(Aretes aretes: list)
-                if(aretes.getTyparete().equals(type)&&!sommetsTraite.contains(aretes)) {
-                    linkedList.add(aretes);
-                    sommetsTraite.add(aretes);
-                }
-        return linkedList;
-    }
-
-    public void getSommets(){
-        List<Sommets> sommetsTraites = new LinkedList<>();
-        for(ArrayList<Aretes> list : graphe)
-            for(Aretes aretes: list)
-                if(!sommetsTraites.contains(aretes.getSommetA())){
-                    sommetsTraites.add(aretes.getSommetA());
-                    System.out.println(aretes.getSommetA());
-                }
-    }
-
-    public void affNbType(String type){
-        System.out.println("Il y a " +getNbType(type)+" "+getTypeFull(type,2));
-    }
-
-    public int getNbType(String type) {
-        int compteur = 0;
-        switch(type){
-            case "V":
-            case "R":
-            case "L":
-                compteur = countType(type,2);
-                break;
-            case "N":
-            case "A":
-            case "D":
-                compteur = countType(type,1);
-                break;
-        }return compteur;
+        return result.toString();
     }
 
     private int countType(String type,int opt) {
@@ -377,15 +237,130 @@ public class Graphe {
                 break;
         }
         return cpt;
-
     }
 
-    public void infoAretes(Aretes aretes){
+    // /(~~~~~****~~~~~)\
+    // --- O-distance ---
+    // \(~~~~~****~~~~~)/
+
+    public void affNbType(String type){
+        System.out.println("Il y a " +getNbType(type)+" "+getTypeFull(type,2));
+    }
+
+    public List<Object> afficheElt(String type) {
+        List<Object> objectList = null;
+        switch (type) {
+            case "A":
+            case "D":
+            case "N":
+                objectList = getAretesOfType(type);
+                break;
+            case "V":
+            case "L":
+            case "R":
+                objectList = getTypeSommet(type);
+                break;
+        }
+        return objectList;
+    }
+
+    private List<Object> getTypeSommet(String type) {
+        List<Object> linkedList = new LinkedList<>();
+        List<Sommets> sommetTraite = new LinkedList<>();
+        for (ArrayList<Aretes> list : graphe)
+            for (Aretes aretes : list)
+                if (aretes.getSommetA().getType().equals(type) && !sommetTraite.contains(aretes.getSommetA())){
+                    linkedList.add(aretes.getSommetA());
+                    sommetTraite.add(aretes.getSommetA());
+                }
+        return linkedList;
+    }
+
+    private List<Object> getAretesOfType(String type){
+        List<Object> linkedList = new LinkedList<>();
+        List<Aretes> sommetsTraite = new LinkedList<>();
+        for(ArrayList<Aretes> list: graphe)
+            for(Aretes aretes: list)
+                if(aretes.getTyparete().equals(type)&&!sommetsTraite.contains(aretes)) {
+                    linkedList.add(aretes);
+                    sommetsTraite.add(aretes);
+                }
+        return linkedList;
+    }
+
+    public int getNbType(String type) {
+        int compteur = 0;
+        switch(type){
+            case "V":
+            case "R":
+            case "L":
+                compteur = countType(type,2);
+                break;
+            case "N":
+            case "A":
+            case "D":
+                compteur = countType(type,1);
+                break;
+        }return compteur;
+    }
+
+    // /(~~~~~****~~~~~)\
+    // --- 1-distance ---
+    // \(~~~~~****~~~~~)/
+    
+    public List<String> voisinSommet(String sommets){
+        List<String> strings = new LinkedList();
+        if(sommetExiste(sommets)) {
+            System.out.println(sommets + " est lié avec:");
+            strings.add(sommets + " est lié avec:\n");
+            LinkedList<Aretes> linkedList = getAretesOfSommet(sommets);
+            for (Aretes aretes: linkedList) {
+                if (aretes.getSommetA().getName().equals(sommets)) {
+                    Aretes found = aretes;
+                    System.out.println("    " + found.getSommetB().getName() + " qui est "+getTypeFull(found.getSommetB().getType(),1)+" par " + getTypeFull(found.getTyparete(),1) + " de distance " + found.getDistance() + " km");
+                    strings.add("    " + found.getSommetB().getName() + " qui est "+getTypeFull(found.getSommetB().getType(),1)+" par " + getTypeFull(found.getTyparete(),1) + " de distance " + found.getDistance() + " km\n");
+                }
+            }
+        }else {
+            System.out.println("Aucun sommet de ce nom n'existe");
+            strings.add("Aucun sommet de ce nom n'existe");
+        }return strings;
+    }
+
+    public void voisinSommet(Sommets sommets){
+        voisinSommet(sommets.getName());
+    }
+
+    private LinkedList<Aretes> getAretesOfSommet(String sommets){
+        LinkedList<Aretes> aretesList = new LinkedList<>();
+        for(ArrayList<Aretes> list: graphe)
+            for(Aretes aretes : list)
+                if(aretes.getSommetA().getName().equals(sommets))
+                    aretesList.add(aretes);
+        return aretesList;
+    }
+
+    private LinkedList<Aretes> getAretesOfSommet(Sommets sommets){
+        return getAretesOfSommet(sommets.getName());
+    }
+
+    public LinkedList<String> getAretesOfSommet(String sommets, String type){
+        List<Aretes> aretesList = getAretesOfSommet(sommets);
+        LinkedList<String> res = new LinkedList<>();
+        for(Aretes aretes: aretesList)
+            if(aretes.getSommetB().getType().equals(type)) {
+                res.add(aretes.getSommetB().getName());
+                System.out.println(aretes.getSommetB().getName());
+            }
+        return res;
+    }
+
+    /*public void infoAretes(Aretes aretes){
         for(ArrayList<Aretes> list: graphe)
             for(Aretes aretes1: list){
                 if(aretes1.getSommetA().getName().equals(aretes.getSommetA().getName())&&aretes1.getSommetB().getName().equals(aretes.getSommetB().getName())) {
                     System.out.println(aretes1);
                 }
             }
-    }
+    }*/
 }
