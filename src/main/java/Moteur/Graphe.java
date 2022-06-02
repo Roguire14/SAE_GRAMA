@@ -243,8 +243,9 @@ public class Graphe {
     // --- O-distance ---
     // \(~~~~~****~~~~~)/
 
-    public void affNbType(String type){
+    public String affNbType(String type){
         System.out.println("Il y a " +getNbType(type)+" "+getTypeFull(type,2));
+        return "Il y a " +getNbType(type)+" "+getTypeFull(type,2);
     }
 
     public List<Object> afficheElt(String type) {
