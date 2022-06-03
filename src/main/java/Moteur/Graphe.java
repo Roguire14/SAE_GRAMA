@@ -193,7 +193,7 @@ public class Graphe {
     }
 
     private String getTypeFull(String type,int opt){
-        StringBuffer result = null;
+        StringBuffer result = new StringBuffer();
         if(opt == 1) {
             switch (type) {
                 case "L":
@@ -206,22 +206,22 @@ public class Graphe {
         }
         switch(type) {
             case "V":
-                result.append("ville");
+                result.append("ville.s");
                 break;
             case "L":
-                result.append("centre de loisir");
+                result.append("centre.s de loisir");
                 break;
             case "R":
-                result.append("restaurant");
+                result.append("restaurant.s");
                 break;
             case "A":
-                result.append("autoroute");
+                result.append("autoroute.s");
                 break;
             case "D":
-                result.append("départementale");
+                result.append("départementale.s");
                 break;
             case "N":
-                result.append("nationale");
+                result.append("nationale.s");
                 break;
         }
         return result.toString();
@@ -255,7 +255,6 @@ public class Graphe {
     // \(~~~~~****~~~~~)/
 
     public String affNbType(String type){
-        System.out.println("Il y a " +getNbType(type)+" "+getTypeFull(type,2));
         return "Il y a " +getNbType(type)+" "+getTypeFull(type,2);
     }
 
