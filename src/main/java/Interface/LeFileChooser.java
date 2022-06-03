@@ -19,7 +19,7 @@ public class LeFileChooser extends JFrame {
         fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir")));
         FileFilter filter = new FileNameExtensionFilter("Fichier JSON","json");
         FileFilter filter1 = new FileNameExtensionFilter("Fichier CSV","csv");
-        fileChooser.addChoosableFileFilter(filter); fileChooser.addChoosableFileFilter(filter1);
+        fileChooser.addChoosableFileFilter(filter1); fileChooser.addChoosableFileFilter(filter);
         fileChooser.setAcceptAllFileFilterUsed(false);
         fileChooser.showOpenDialog(this);
         return fileChooser;
