@@ -378,14 +378,14 @@ public class Graphe {
     // --- 2-distance ---
     // \(~~~~~****~~~~~)/
 
-    public boolean isTwoDistance(Sommets sommetA, Sommets sommetB){
+    public boolean isTwoDistance(String sommetA, String sommetB){
         boolean verdict = false;
         for(ArrayList<Aretes> aretes: graphe)
             for(Aretes a: aretes){
-                if(a.getSommetA().getName().equals(sommetA.getName())) {
+                if(a.getSommetA().getName().equals(sommetA)) {
                     List<Aretes> voisin = getAretesOfSommet(a.getSommetB());
                     for(Aretes arete: voisin){
-                        if(arete.getSommetB().getName().equals(sommetB.getName())){
+                        if(arete.getSommetB().getName().equals(sommetB)){
                             verdict = true;
                         }
                     }
