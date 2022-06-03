@@ -167,17 +167,6 @@ public class Graphe {
     // --- Utilitaires ---
     // \(~~~~~*****~~~~~)/
 
-    public LinkedList<Sommets> getListeSommets()   // public pour être utilisé dans les classes Écrans
-    {
-        LinkedList<Sommets> r = new LinkedList<Sommets>();
-        LinkedList<Sommets> sommetsTraites = new LinkedList<Sommets>();
-        for(ArrayList<Aretes> liste : graphe)
-            for(Aretes arete : liste)
-                if(sommetExiste(arete.getSommetA()) && !sommetsTraites.contains(arete.getSommetA()))
-                    sommetsTraites.add(arete.getSommetA());
-        return sommetsTraites;
-    }
-
     private boolean sommetExiste(String sommet){
         boolean existe = false;
         ArrayList<Aretes> list = null;
@@ -340,9 +329,9 @@ public class Graphe {
         }return strings;
     }
 
-    public void voisinSommet(Sommets sommets){
-        voisinSommet(sommets.getName());
-    }
+//    public List<String> voisinSommet(Sommets sommets){
+//        return voisinSommet(sommets.getName());
+//    }
 
     private LinkedList<Aretes> getAretesOfSommet(String sommets){
         LinkedList<Aretes> aretesList = new LinkedList<>();
@@ -363,7 +352,6 @@ public class Graphe {
         for(Aretes aretes: aretesList)
             if(aretes.getSommetB().getType().equals(type)) {
                 res.add(aretes.getSommetB().getName());
-                System.out.println(aretes.getSommetB().getName());
             }
         return res;
     }
@@ -376,4 +364,24 @@ public class Graphe {
                 }
             }
     }*/
+
+    // /(~~~~~****~~~~~)\
+    // --- 2-distance ---
+    // \(~~~~~****~~~~~)/
+
+    public boolean isTwoDistance(Sommets sommetA, Sommets sommetB){
+        boolean verdict = false;
+        for(ArrayList<Aretes> aretes: graphe)
+            for(Aretes a: aretes){
+                if(a.getSommetA().getName().equals(sommetA.getName())) {
+                    List<Aretes> voisin = getAretesOfSommet(a.getSommetB());
+                    for(Aretes arete: voisin){
+                        if(arete.getSommetB().getName().equals(sommetB.getName())){
+                            verdict = true;
+                        }
+                    }
+                }
+            }
+        return verdict;
+    }
 }
