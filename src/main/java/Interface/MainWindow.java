@@ -14,6 +14,11 @@ public class MainWindow extends JFrame {
 
     private Graphe engine;
 
+    private void ecranZeroStart(){
+        new Ecran_Zero(engine,this);
+        this.setVisible(false);;
+    }
+
     public MainWindow(File file){
         super();
         engine = new Graphe(this,file);
@@ -69,7 +74,7 @@ public class MainWindow extends JFrame {
         }
         JMenuBar menuBar = new JMenuBar();
         JMenuItem jMenuItem = new JMenuItem("Écran 0 - information 0-distance");
-        jMenuItem.addActionListener(e -> new Ecran_Zero(engine));
+        jMenuItem.addActionListener(e -> ecranZeroStart());
         JMenuItem jMenuItem1 = new JMenuItem("Écran 1 - voisinnage direct -> 1-distance");
         JMenuItem jMenuItem2 = new JMenuItem("Écran 2 - voisinage à 2 sauts -> 2-distance");
         JMenuItem jMenuItem3 = new JMenuItem("Écran 3 - comparaison de sites à 2 sauts ou plus -> >= 2-distance");
@@ -81,10 +86,10 @@ public class MainWindow extends JFrame {
         menuBar.add(action);
 
         JMenu ppt = new JMenu("Options");
-        JMenuItem ppt_1 = new JMenuItem( "Ouvrir un autre graphe");
+        JMenuItem ppt_1 = new JMenuItem( "Ouvrir un autre graphe (not implemented yet)");
         ppt_1.setEnabled(false);
         JMenuItem ppt_2 = new JMenuItem("Quitter");
-        ppt_2.addActionListener(e -> dispose());
+        ppt_2.addActionListener(e -> System.exit(42));
         ppt.add(ppt_1);
         ppt.add(ppt_2);
         menuBar.add(ppt);
