@@ -24,6 +24,9 @@ public class MainWindow extends JFrame {
             case 1:
                 new Ecran_Un(engine, this);
                 break;
+            case 2:
+                new Ecran_Deux(engine,this);
+                break;
         }
         this.setVisible(false);
     }
@@ -87,6 +90,7 @@ public class MainWindow extends JFrame {
         JMenuItem jMenuItem1 = new JMenuItem("Écran 1 - voisinnage direct -> 1-distance");
         jMenuItem1.addActionListener(e -> ecranStart(1));
         JMenuItem jMenuItem2 = new JMenuItem("Écran 2 - voisinage à 2 sauts -> 2-distance");
+        jMenuItem2.addActionListener(e -> ecranStart(2));
         JMenuItem jMenuItem3 = new JMenuItem("Écran 3 - comparaison de sites à 2 sauts ou plus -> >= 2-distance");
         JMenu action = new JMenu("Écrans");
         action.add(jMenuItem0);
