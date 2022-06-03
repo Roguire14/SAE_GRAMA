@@ -243,6 +243,15 @@ public class Graphe {
     // --- O-distance ---
     // \(~~~~~****~~~~~)/
 
+    public List<Sommets> getAllSommet(){
+        List<Sommets> resultat = new ArrayList<>();
+        for(ArrayList<Aretes> list : graphe)
+            for(Aretes aretes: list)
+                if(!resultat.contains(aretes.getSommetA()))
+                    resultat.add(aretes.getSommetA());
+        return resultat;
+    }
+
     public String affNbType(String type){
         return "Il y a " +getNbType(type)+" "+getTypeFull(type,2);
     }
