@@ -14,9 +14,18 @@ public class MainWindow extends JFrame {
 
     private Graphe engine;
 
-    private void ecranZeroStart(){
-        new Ecran_Zero(engine,this);
-        this.setVisible(false);;
+    private void ecranStart(int numero)
+    {
+        switch(numero)
+        {
+            case 0:
+                new Ecran_Zero(engine, this);
+                break;
+            case 1:
+                new Ecran_Un(engine, this);
+                break;
+        }
+        this.setVisible(false);
     }
 
     public MainWindow(File file){
@@ -73,13 +82,14 @@ public class MainWindow extends JFrame {
             main.add(button1);
         }
         JMenuBar menuBar = new JMenuBar();
-        JMenuItem jMenuItem = new JMenuItem("Écran 0 - information 0-distance");
-        jMenuItem.addActionListener(e -> ecranZeroStart());
+        JMenuItem jMenuItem0 = new JMenuItem("Écran 0 - information 0-distance");
+        jMenuItem0.addActionListener(e -> ecranStart(0));
         JMenuItem jMenuItem1 = new JMenuItem("Écran 1 - voisinnage direct -> 1-distance");
+        jMenuItem1.addActionListener(e -> ecranStart(1));
         JMenuItem jMenuItem2 = new JMenuItem("Écran 2 - voisinage à 2 sauts -> 2-distance");
         JMenuItem jMenuItem3 = new JMenuItem("Écran 3 - comparaison de sites à 2 sauts ou plus -> >= 2-distance");
         JMenu action = new JMenu("Écrans");
-        action.add(jMenuItem);
+        action.add(jMenuItem0);
         action.add(jMenuItem1);
         action.add(jMenuItem2);
         action.add(jMenuItem3);

@@ -13,7 +13,7 @@ public class Ecran_Zero extends JFrame {
     private Graphe engine;
     private MainWindow window;
 
-    private void ecranZeroStop(){
+    private void ecranStop(){
         window.setVisible(true);
     }
 
@@ -22,7 +22,7 @@ public class Ecran_Zero extends JFrame {
         WindowListener l = new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                ecranZeroStop();
+                ecranStop();
             }
         };
         engine = graphe;
