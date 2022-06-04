@@ -61,8 +61,10 @@ public class Ecran_Un extends JFrame
                     if(element.getName().equals(selecteur.getSelectedItem()))
                     {
                         resultat.delete(0,resultat.length());
+                        resultat.append("<html>");
                         for(String s : engine.voisinSommet(element))
-                            resultat.append(s+"\n");
+                            resultat.append(s+"<br/>");
+                        resultat.append("<html>");
                         listeVoisins.setText(resultat.toString());
                     }
             }
