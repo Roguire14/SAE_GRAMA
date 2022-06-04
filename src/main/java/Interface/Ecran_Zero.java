@@ -33,10 +33,11 @@ public class Ecran_Zero extends JFrame {
 
     private void constrFen() {
         setTitle("Écran 0 - information 0-distance");
-        setSize(new Dimension(800,300));
+        setSize(new Dimension(800,400));
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         setContentPane(constrPan());
+        setResizable(false);
         setVisible(true);
     }
 
@@ -45,8 +46,8 @@ public class Ecran_Zero extends JFrame {
         main.add(Box.createRigidArea(new Dimension(0,30)));
         main.setLayout(new BoxLayout(main,BoxLayout.Y_AXIS));
         JPanel requete = new JPanel();
-        requete.setLayout(new GridLayout(2,2,30,30));
-        requete.setMaximumSize(new Dimension(740,100));
+        requete.setLayout(new GridLayout(4,2,30,30));
+        requete.setMaximumSize(new Dimension(740,220));
         JPanel counter = new JPanel();
         counter.setLayout(new BoxLayout(counter,BoxLayout.Y_AXIS));
 
@@ -165,9 +166,12 @@ public class Ecran_Zero extends JFrame {
         });
         choixArrBox.setPreferredSize(new Dimension(choixArrBox.getPreferredSize().width,choixArrBox.getPreferredSize().height));
 
-
+        requete.add(new JLabel("Sommets"));
+        requete.add(new JLabel("Résultat de la requête"));
         requete.add(choixTypeBox);
         requete.add(choixSelonPreviousSommet);
+        requete.add(new JLabel("Arêtes"));
+        requete.add(new JLabel("Résultat de la requête"));
         requete.add(choixArrBox);
         requete.add(choixSelonPreviousArrete);
         main.add(requete);
