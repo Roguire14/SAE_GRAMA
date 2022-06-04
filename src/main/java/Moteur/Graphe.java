@@ -323,24 +323,23 @@ public class Graphe {
         List<String> strings = new LinkedList();
         if(sommetExiste(sommets)) {
             System.out.println(sommets + " est lié avec:");
-            strings.add(sommets + " est lié avec:\n");
             LinkedList<Aretes> linkedList = getAretesOfSommet(sommets);
             for (Aretes aretes: linkedList) {
                 if (aretes.getSommetA().getName().equals(sommets)) {
                     Aretes found = aretes;
                     System.out.println("    " + found.getSommetB().getName() + " qui est "+getTypeFull(found.getSommetB().getType(),1)+" par " + getTypeFull(found.getTyparete(),1) + " de distance " + found.getDistance() + " km");
-                    strings.add("    " + found.getSommetB().getName() + " qui est "+getTypeFull(found.getSommetB().getType(),1)+" par " + getTypeFull(found.getTyparete(),1) + " de distance " + found.getDistance() + " km\n");
+                    strings.add(found.getSommetB().getName());
                 }
             }
         }else {
             System.out.println("Aucun sommet de ce nom n'existe");
-            strings.add("Aucun sommet de ce nom n'existe");
+            strings = null;
         }return strings;
     }
 
-//    public List<String> voisinSommet(Sommets sommets){
-//        return voisinSommet(sommets.getName());
-//    }
+    public List<String> voisinSommet(Sommets sommets){
+        return voisinSommet(sommets.getName());
+    }
 
     private LinkedList<Aretes> getAretesOfSommet(String sommets){
         LinkedList<Aretes> aretesList = new LinkedList<>();
