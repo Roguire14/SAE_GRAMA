@@ -1,7 +1,9 @@
 package Interface;
 
+import Dessin.DisplayArea;
 import Moteur.Graphe;
 import Moteur.Sommets;
+import Dessin.DisplayArea;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -37,6 +39,7 @@ public class MainWindow extends JFrame {
     public MainWindow(File file){
         super();
         engine = new Graphe(this,file);
+        new DisplayArea(engine.getAllSommet(), engine.getAllArete(), engine);
         constrFen();
     }
 

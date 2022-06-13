@@ -6,7 +6,9 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import javax.sound.midi.SysexMessage;
 import java.io.*;
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class Graphe {
@@ -258,12 +260,32 @@ public class Graphe {
     // --- O-distance ---
     // \(~~~~~****~~~~~)/
 
-    public List<Sommets> getAllSommet(){
-        List<Sommets> resultat = new ArrayList<>();
+    public ArrayList<Sommets> getAllSommet(){
+        ArrayList<Sommets> resultat = new ArrayList<>();
         for(ArrayList<Aretes> list : graphe)
-            for(Aretes aretes: list)
-                if(!resultat.contains(aretes.getSommetA()))
-                    resultat.add(aretes.getSommetA());
+            for(Aretes arete : list)
+                if (!resultat.contains(arete.getSommetA()))
+                    resultat.add(arete.getSommetA());
+        return resultat;
+    }
+    
+    public ArrayList<Aretes> getAllArete()
+    {
+        int count = 0; //DEBUG
+        ArrayList<Aretes> resultat = new ArrayList<>();
+        Aretes current;
+        for(ArrayList<Aretes> list : graphe)
+            for(Aretes arete : list)
+            {
+                current = arete;
+                System.out.println(current.toString()); //DEBUG
+                if(!(current.getSommetA() == arete.getSommetB() && current.getSommetB() == arete.getSommetA()) && !resultat.contains(current))
+                {
+                    count++; //DEBUG
+                    resultat.add(current);
+                }
+            }
+        System.out.println(count); //DEBUG
         return resultat;
     }
 
@@ -282,13 +304,13 @@ public class Graphe {
             case "V":
             case "L":
             case "R":
-                objectList = getTypeSommet(type);
+                objectList = getSommetsOfType(type);
                 break;
         }
         return objectList;
     }
 
-    private List<Object> getTypeSommet(String type) {
+    private List<Object> getSommetsOfType(String type) {
         List<Object> linkedList = new LinkedList<>();
         List<Sommets> sommetTraite = new LinkedList<>();
         for (ArrayList<Aretes> list : graphe)
