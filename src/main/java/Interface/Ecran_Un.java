@@ -47,6 +47,8 @@ public class Ecran_Un extends JFrame
         for(Sommets som : engine.getAllSommet())
             listeSommets.add(som);
 
+        JLabel introListe = new JLabel("Ce sommet est connécté à :");
+        introListe.setAlignmentX(Component.LEFT_ALIGNMENT);
         StringBuffer resultat = new StringBuffer("Rien pour le moment");
         JLabel listeVoisins = new JLabel(resultat.toString());
 
@@ -76,6 +78,8 @@ public class Ecran_Un extends JFrame
         main.add(Box.createRigidArea(new Dimension(10, 30)));
         main.add(selecteur);
         main.add(Box.createRigidArea(new Dimension(10, 50)));
+        main.add(introListe);
+        main.add(Box.createRigidArea(new Dimension(10,3)));
         main.add(listeVoisins);
         return main;
     }
