@@ -69,23 +69,25 @@ public class MainWindow extends JFrame {
             status.setAlignmentX(Component.CENTER_ALIGNMENT);
             main.add(Box.createRigidArea(new Dimension(0,20)));
             main.add(status);
-            JButton button1 = new JButton("Clique ici pour créer une save du JSON en CSV");
-            button1.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    int taille = 0;
-                    String input = null;
-                    while (taille == 0) {
-                        input = JOptionPane.showInputDialog(null, "Veuillez insérer le nom du fichier", "Nom du fichier", JOptionPane.INFORMATION_MESSAGE);
-                        taille = input.length();
+            if(engine.getExtension(engine.getFileName()).get().equals("json")){
+                JButton button1 = new JButton("Clique ici pour créer une save du JSON en CSV");
+                button1.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        int taille = 0;
+                        String input = null;
+                        while (taille == 0) {
+                            input = JOptionPane.showInputDialog(null, "Veuillez insérer le nom du fichier", "Nom du fichier", JOptionPane.INFORMATION_MESSAGE);
+                            taille = input.length();
+                        }
+                        StringBuffer stringBuffer = new StringBuffer(input);
+                        if (!stringBuffer.toString().endsWith(".csv")) stringBuffer.append(".csv");
+                        engine.JSONintoCSV(stringBuffer.toString());
                     }
-                    StringBuffer stringBuffer = new StringBuffer(input);
-                    if(!stringBuffer.toString().endsWith(".csv"))stringBuffer.append(".csv");
-                    engine.JSONintoCSV(stringBuffer.toString());
-                }
-            });
-            button1.setAlignmentX(CENTER_ALIGNMENT);
-            main.add(button1);
+                });
+                button1.setAlignmentX(CENTER_ALIGNMENT);
+                main.add(button1);
+            }
         }
         JMenuBar menuBar = new JMenuBar();
         JMenuItem jMenuItem0 = new JMenuItem("Écran 0 - information 0-distance");

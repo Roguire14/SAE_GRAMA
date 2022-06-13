@@ -15,18 +15,22 @@ public class Graphe {
     private ArrayList<ArrayList<Aretes>> graphe;
     private static int status;
     private MainWindow window;
+    private String fileName;
 
     public Graphe(MainWindow window,File file){
         status = 0;
+        fileName = file.getName();
         this.graphe = load(file.getName());
         this.window = window;
     }
+
+    public String getFileName() {System.out.println(fileName);return fileName;}
 
     public int getStatus() {
         return status;
     }
 
-    private Optional<String> getExtension(String filename){
+    public Optional<String> getExtension(String filename){
         return Optional.ofNullable(filename)
                 .filter(f -> f.contains("."))
                 .map(f -> f.substring(filename.lastIndexOf(".") + 1));
@@ -34,7 +38,7 @@ public class Graphe {
 
     private ArrayList load(String filename){
         ArrayList<ArrayList<Aretes>> stock = new ArrayList<>();
-        Aretes aretes = null;
+        Aretes aretes;
 
         try {
             if(getExtension(filename).get().equals("json")){
