@@ -22,7 +22,7 @@ public class Graphe {
         this.window = window;
     }
 
-    public String getFileName() {System.out.println(fileName);return fileName;}
+    public String getFileName() {return fileName;}
 
     public int getStatus() {
         return status;
@@ -243,6 +243,17 @@ public class Graphe {
         return cpt;
     }
 
+    public boolean isDifferent(Sommets sA, Sommets sB){
+        return !sA.getName().equals(sB.getName());
+    }
+
+    public Sommets getSommet(String name){
+        for(ArrayList<Aretes> list: graphe)
+            for(Aretes aretes: list)
+                if(aretes.getSommetA().getName().equals(name)) return aretes.getSommetA();
+        return null;
+    }
+
     // /(~~~~~****~~~~~)\
     // --- O-distance ---
     // \(~~~~~****~~~~~)/
@@ -326,13 +337,29 @@ public class Graphe {
     public List<String> voisinSommet(String sommets){
         List<String> strings = new LinkedList();
         if(sommetExiste(sommets)) {
-            System.out.println(sommets + " est lié avec:");
+//            System.out.println(sommets + " est lié avec:");
             LinkedList<Aretes> linkedList = getAretesOfSommet(sommets);
             for (Aretes aretes: linkedList) {
-                if (aretes.getSommetA().getName().equals(sommets)) {
+                if (!strings.contains(aretes.getSommetB().getName())&&aretes.getSommetA().getName().equals(sommets)) {
                     Aretes found = aretes;
-                    System.out.println("    " + found.getSommetB().getName() + " qui est "+getTypeFull(found.getSommetB().getType(),1)+" par " + getTypeFull(found.getTyparete(),1) + " de distance " + found.getDistance() + " km");
+//                    System.out.println("    " + found.getSommetB().getName() + " qui est "+getTypeFull(found.getSommetB().getType(),1)+" par " + getTypeFull(found.getTyparete(),1) + " de distance " + found.getDistance() + " km");
                     strings.add(found.getSommetB().getName());
+                }
+            }
+        }else {
+            System.out.println("Aucun sommet de ce nom n'existe");
+            strings = null;
+        }return strings;
+    }
+
+    public List<Sommets> SvoisinSommet(String sommets){
+        List<Sommets> strings = new LinkedList();
+        if(sommetExiste(sommets)) {
+            LinkedList<Aretes> linkedList = getAretesOfSommet(sommets);
+            for (Aretes aretes: linkedList) {
+                if (!strings.contains(aretes.getSommetB().getName())&&aretes.getSommetA().getName().equals(sommets)) {
+                    Aretes found = aretes;
+                    strings.add(found.getSommetB());
                 }
             }
         }else {
@@ -395,5 +422,84 @@ public class Graphe {
                 }
             }
         return verdict;
+    }
+
+    public boolean isMore(int type,Sommets sA, Sommets sB){
+        boolean b = false;
+        int compteurA = 0;
+        int compteurB = 0;
+        List<Sommets> sommetsA = SvoisinSommet(sA.getName());
+        List<Sommets> sommetsB = SvoisinSommet(sB.getName());
+        List<String> sommetTraiteA = new LinkedList<>();
+        List<String> sommetTraiteB = new LinkedList<>();
+        switch (type){
+            case 1: // ouverte
+                sommetTraiteA.add(sA.getName());
+                for(Sommets s: sommetsA) {
+                    List<Sommets> autresSommets = SvoisinSommet(s.getName());
+                    for (Sommets s1 : autresSommets) {
+                        if (s1.getType().equals("V") && !sommetsA.contains(s1) && !s1.getName().equals(sA.getName()) && !sommetTraiteA.contains(s1.getName())) {
+                            compteurA++;
+                            sommetTraiteA.add(s1.getName());
+                        }
+                    }
+                }
+                for(Sommets s: sommetsB) {
+                    List<Sommets> autresSommets = SvoisinSommet(s.getName());
+                    for(Sommets s1: autresSommets){
+                        if (s1.getType().equals("V")&&!sommetsB.contains(s1)&&!s1.getName().equals(sB.getName())&&!sommetTraiteB.contains(s1.getName())){
+                            compteurB++;
+                            sommetTraiteB.add(s1.getName());
+                        }
+                    }
+                }
+                if(compteurA>compteurB) b = true;
+                break;
+            case 2: // gastronomie
+                sommetTraiteA.add(sA.getName());
+                for(Sommets s: sommetsA) {
+                    List<Sommets> autresSommets = SvoisinSommet(s.getName());
+                    for (Sommets s1 : autresSommets) {
+                        if (s1.getType().equals("R") && !sommetsA.contains(s1) && !s1.getName().equals(sA.getName()) && !sommetTraiteA.contains(s1.getName())) {
+                            compteurA++;
+                            sommetTraiteA.add(s1.getName());
+                        }
+                    }
+                }
+                for(Sommets s: sommetsB) {
+                    List<Sommets> autresSommets = SvoisinSommet(s.getName());
+                    for(Sommets s1: autresSommets){
+                        if (s1.getType().equals("R")&&!sommetsB.contains(s1)&&!s1.getName().equals(sB.getName())&&!sommetTraiteB.contains(s1.getName())){
+                            compteurB++;
+                            sommetTraiteB.add(s1.getName());
+                        }
+                    }
+                }
+                if(compteurA>compteurB) b = true;
+                break;
+            case 3: // culturelle
+                sommetTraiteA.add(sA.getName());
+                for(Sommets s: sommetsA) {
+                    List<Sommets> autresSommets = SvoisinSommet(s.getName());
+                    for (Sommets s1 : autresSommets) {
+                        if (s1.getType().equals("L") && !sommetsA.contains(s1) && !s1.getName().equals(sA.getName()) && !sommetTraiteA.contains(s1.getName())) {
+                            compteurA++;
+                            sommetTraiteA.add(s1.getName());
+                        }
+                    }
+                }
+                for(Sommets s: sommetsB) {
+                    List<Sommets> autresSommets = SvoisinSommet(s.getName());
+                    for(Sommets s1: autresSommets){
+                        if (s1.getType().equals("L")&&!sommetsB.contains(s1)&&!s1.getName().equals(sB.getName())&&!sommetTraiteB.contains(s1.getName())){
+                            compteurB++;
+                            sommetTraiteB.add(s1.getName());
+                        }
+                    }
+                }
+                if(compteurA>compteurB) b = true;
+                break;
+        }
+        return b;
     }
 }
