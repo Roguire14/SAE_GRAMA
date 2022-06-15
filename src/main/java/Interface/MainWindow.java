@@ -16,6 +16,7 @@ public class MainWindow extends JFrame {
 
     private Graphe engine;
     private DisplayArea displayArea;
+    private JLabel status;
 
     private void ecranStart(int numero)
     {
@@ -37,13 +38,28 @@ public class MainWindow extends JFrame {
         this.setVisible(false);
     }
 
+    private void autoStatus(){
+        if(engine.getStatus()==0){
+            status.setForeground(Color.RED);
+            status.setText("Erreur lors du chargement du graphe");
+        }else{
+            status.setForeground(Color.GREEN);
+            status.setText("Succès du chargement du graphe");
+        }
+    }
+
     private void newGraphe(){
-        engine.clearEverything();
-        displayArea.off();
+        if(engine.getStatus()==1){
+            engine.clearEverything();
+            displayArea.off();}
         LeFileChooser fileChooser = new LeFileChooser();
         File file = fileChooser.getFileChooser().getSelectedFile();
         engine = new Graphe(this,file);
-        displayArea = new DisplayArea(engine.getAllSommet(),engine.getAllArete(),engine);
+        autoStatus();
+        if(engine.getStatus()==1)
+            displayArea = new DisplayArea(engine.getAllSommet(),engine.getAllArete(),engine);
+        setVisible(false);
+        setVisible(true);
     }
 
     public MainWindow(File file){
@@ -73,7 +89,6 @@ public class MainWindow extends JFrame {
         JLabel msg_suite = new JLabel("aka Baptiste BOISMENU et Romain GUION");
         msg_suite.setAlignmentX(Component.CENTER_ALIGNMENT);
         main.add(msg_suite);
-        JLabel status;
         if(engine.getStatus()==0){
             status = new JLabel("Erreur lors du chargement du graphe");
             status.setForeground(Color.RED);
@@ -127,8 +142,8 @@ public class MainWindow extends JFrame {
         JMenuItem ppt_2 = new JMenuItem("Ouvrir un autre graphe");
         ppt_2.addActionListener(e -> newGraphe());
         ppt_1.addActionListener(e -> System.exit(42));
-        ppt.add(ppt_1);
         ppt.add(ppt_2);
+        ppt.add(ppt_1);
         menuBar.add(ppt);
 
         this.setJMenuBar(menuBar);
