@@ -54,6 +54,7 @@ public class Ecran_Trois extends JFrame {
         setSize(800,300);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
+        setResizable(false);
         setContentPane(constrPan());
         setVisible(true);
     }

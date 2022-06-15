@@ -8,14 +8,17 @@ import Moteur.*;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.Node;
 import org.graphstream.graph.implementations.DefaultGraph;
-import org.graphstream.ui.graphicGraph.GraphicGraph;
+import org.graphstream.ui.view.Viewer;
 
 public class DisplayArea extends JFrame
 {
     private ArrayList<Sommets> listeSommets;
     private ArrayList<Aretes> listeAretes;
 
+    private Viewer viewer;
+
     private Graphe engine;
+    private Graph leGraphe;
 
     public DisplayArea(ArrayList sommets, ArrayList aretes, Graphe graphe)
     {
@@ -24,7 +27,7 @@ public class DisplayArea extends JFrame
         listeAretes = aretes;
         engine = graphe;
 
-        Graph leGraphe = new DefaultGraph("yes");
+        leGraphe = new DefaultGraph("yes");
         for (Sommets sommet : listeSommets)
             switch(sommet.getType().charAt(0))
             {
@@ -55,6 +58,12 @@ public class DisplayArea extends JFrame
                 System.out.println("Ratio la Edge");
             }
         }
-        leGraphe.display();
+        viewer = leGraphe.display();
+        viewer.setCloseFramePolicy(Viewer.CloseFramePolicy.HIDE_ONLY);
+    }
+
+    public void off(){
+        leGraphe.clear();
+        viewer.close();
     }
 }

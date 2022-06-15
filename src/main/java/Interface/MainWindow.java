@@ -15,6 +15,7 @@ import java.io.File;
 public class MainWindow extends JFrame {
 
     private Graphe engine;
+    private DisplayArea displayArea;
 
     private void ecranStart(int numero)
     {
@@ -36,10 +37,19 @@ public class MainWindow extends JFrame {
         this.setVisible(false);
     }
 
+    private void newGraphe(){
+        engine.clearEverything();
+        displayArea.off();
+        LeFileChooser fileChooser = new LeFileChooser();
+        File file = fileChooser.getFileChooser().getSelectedFile();
+        engine = new Graphe(this,file);
+        displayArea = new DisplayArea(engine.getAllSommet(),engine.getAllArete(),engine);
+    }
+
     public MainWindow(File file){
         super();
         engine = new Graphe(this,file);
-        new DisplayArea(engine.getAllSommet(), engine.getAllArete(), engine);
+        displayArea = new DisplayArea(engine.getAllSommet(), engine.getAllArete(), engine);
         constrFen();
     }
 
@@ -49,16 +59,20 @@ public class MainWindow extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setContentPane(constrPan());
-//        pack();
+        setResizable(false);
         setVisible(true);
     }
 
     private JPanel constrPan() {
         JPanel main = new JPanel();
         main.setLayout(new BoxLayout(main, BoxLayout.Y_AXIS));
+        main.add(Box.createRigidArea(new Dimension(0,50)));
         JLabel msg = new JLabel("SAE GRAMA by Chatloupidoux et Roguiré14");
         msg.setAlignmentX(Component.CENTER_ALIGNMENT);
         main.add(msg);
+        JLabel msg_suite = new JLabel("aka Baptiste BOISMENU et Romain GUION");
+        msg_suite.setAlignmentX(Component.CENTER_ALIGNMENT);
+        main.add(msg_suite);
         JLabel status;
         if(engine.getStatus()==0){
             status = new JLabel("Erreur lors du chargement du graphe");
@@ -109,14 +123,13 @@ public class MainWindow extends JFrame {
         menuBar.add(action);
 
         JMenu ppt = new JMenu("Options");
-        JMenuItem ppt_1 = new JMenuItem( "Ouvrir un autre graphe (not implemented yet)");
-        ppt_1.setEnabled(false);
-        JMenuItem ppt_2 = new JMenuItem("Quitter");
-        ppt_2.addActionListener(e -> System.exit(42));
+        JMenuItem ppt_1 = new JMenuItem("Quitter");
+        JMenuItem ppt_2 = new JMenuItem("Ouvrir un autre graphe");
+        ppt_2.addActionListener(e -> newGraphe());
+        ppt_1.addActionListener(e -> System.exit(42));
         ppt.add(ppt_1);
         ppt.add(ppt_2);
         menuBar.add(ppt);
-
 
         this.setJMenuBar(menuBar);
 

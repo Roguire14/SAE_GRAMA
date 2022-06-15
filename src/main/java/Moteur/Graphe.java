@@ -169,6 +169,12 @@ public class Graphe {
         }
     }
 
+    public void clearEverything(){
+        graphe.clear();
+    }
+
+
+
     // /(~~~~~*****~~~~~)\
     // --- Utilitaires ---
     // \(~~~~~*****~~~~~)/

@@ -38,6 +38,7 @@ public class Ecran_Un extends JFrame
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         setContentPane(constrPan());
+        setResizable(false);
         setVisible(true);
     }
 
