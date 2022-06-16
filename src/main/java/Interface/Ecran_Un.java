@@ -56,7 +56,7 @@ public class Ecran_Un extends JFrame
         JComboBox selecteur = new JComboBox();
         for(Sommets s : listeSommets)
             selecteur.addItem(s.getName());
-        selecteur.addItem("");
+        selecteur.setSelectedItem(null);
         selecteur.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
