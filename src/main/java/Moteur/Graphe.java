@@ -247,30 +247,27 @@ public class Graphe {
 
     public ArrayList<Sommets> getAllSommet(){
         ArrayList<Sommets> resultat = new ArrayList<>();
+        int i = 0;
+
         for(ArrayList<Aretes> list : graphe)
             for(Aretes arete : list)
-                if (!resultat.contains(arete.getSommetA()))
+                if(!resultat.contains(arete.getSommetA()))
                     resultat.add(arete.getSommetA());
+
         return resultat;
     }
     
     public ArrayList<Aretes> getAllArete()
     {
-        int count = 0; //DEBUG
         ArrayList<Aretes> resultat = new ArrayList<>();
         Aretes current;
         for(ArrayList<Aretes> list : graphe)
             for(Aretes arete : list)
             {
                 current = arete;
-                System.out.println(current.toString()); //DEBUG
                 if(!(current.getSommetA() == arete.getSommetB() && current.getSommetB() == arete.getSommetA()) && !resultat.contains(current))
-                {
-                    count++; //DEBUG
                     resultat.add(current);
-                }
             }
-        System.out.println(count); //DEBUG
         return resultat;
     }
 

@@ -10,7 +10,7 @@ import org.graphstream.graph.Node;
 import org.graphstream.graph.implementations.DefaultGraph;
 import org.graphstream.ui.graphicGraph.GraphicGraph;
 
-public class DisplayArea extends JFrame
+public class DisplayArea
 {
     private ArrayList<Sommets> listeSommets;
     private ArrayList<Aretes> listeAretes;
@@ -19,7 +19,6 @@ public class DisplayArea extends JFrame
 
     public DisplayArea(ArrayList sommets, ArrayList aretes, Graphe graphe)
     {
-        super();
         listeSommets = sommets;
         listeAretes = aretes;
         engine = graphe;
@@ -52,7 +51,6 @@ public class DisplayArea extends JFrame
             try {
                 leGraphe.addEdge("(" + leGraphe.getEdgeCount() + ")" + arete.getTyparete() + "," + arete.getDistance(), arete.getSommetA().getName(), arete.getSommetB().getName());
             } catch (org.graphstream.graph.EdgeRejectedException edgeRejectedException) {
-                System.out.println("Ratio la Edge");
             }
         }
         leGraphe.display();
