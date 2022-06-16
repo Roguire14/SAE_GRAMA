@@ -65,7 +65,8 @@ public class MainWindow extends JFrame {
     public MainWindow(File file){
         super();
         engine = new Graphe(this,file);
-        displayArea = new DisplayArea(engine.getAllSommet(), engine.getAllArete(), engine);
+        if(engine.getStatus()==1)
+            displayArea = new DisplayArea(engine.getAllSommet(), engine.getAllArete(), engine);
         constrFen();
     }
 
