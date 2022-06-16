@@ -84,7 +84,7 @@ public class MainWindow extends JFrame {
         JPanel main = new JPanel();
         main.setLayout(new BoxLayout(main, BoxLayout.Y_AXIS));
         main.add(Box.createRigidArea(new Dimension(0,50)));
-        JLabel msg = new JLabel("SAE GRAMA by Chatloupidoux et Roguiré14");
+        JLabel msg = new JLabel("SAE GRAMA by Chatloupidou et Roguiré14");
         msg.setAlignmentX(Component.CENTER_ALIGNMENT);
         main.add(msg);
         JLabel msg_suite = new JLabel("aka Baptiste BOISMENU et Romain GUION");
